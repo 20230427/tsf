@@ -1,0 +1,126 @@
+# Default configuration for the dual-domain time series forecaster.
+# Override any field from the command line, e.g.:
+#   python -m src.train --config configs/default.yaml --seq_len 192 --pred_len 96
+
+experiment:
+  name: dual_domain_default
+  seed: 2024
+  checkpoint_dir: checkpoints
+
+data:
+  # Use "synthetic" to generate data on the fly (no files needed), or point
+  # `csv_path` at a wide CSV where the first column is a timestamp and the
+  # remaining columns are variables/channels.
+  source: synthetic          # {synthetic, csv}
+  csv_path: null
+  target_columns: null       # null = use all numeric columns
+  channel_permutation_seed: null  # null=original order; integer=consistent shuffle
+  # Synthetic-data controls (ignored when source == csv)
+  synthetic_length: 8000
+  synthetic_channels: 7
+  # Windowing
+  seq_len: 96                # length of the look-back window (input)
+  pred_len: 24               # forecast horizon (output)
+  # Splits (fractions of the full series, chronological)
+  train_ratio: 0.7
+  val_ratio: 0.1             # test_ratio = 1 - train - val
+  split_protocol: ratio      # {ratio, ETTh, ETTm}. ETTh/ETTm use the canonical
+                             # 12/4/4-month row borders (required to reproduce
+                             # published ETT numbers); ratios are then ignored.
+  scale: true                # standardize using train-set statistics
+
+model:
+  d_model: 128               # hidden width shared by both branches
+  # Time-domain branch
+  time_kernel_size: 25       # moving-average window for series decomposition
+  time_dropout: 0.1
+  time_encoder: mamba        # {mamba/unimamba, bimamba, attention, mlp, none}
+  # Mamba (selective SSM) settings (shared by time_encoder/freq_encoder == mamba)
+  mamba_layers: 2            # number of stacked Mamba blocks
+  mamba_d_state: 16          # SSM state dimension (N)
+  mamba_d_conv: 4            # causal conv kernel width
+  mamba_expand: 2            # inner expansion factor (d_inner = expand * d_model)
+  use_official_mamba: true   # use mamba-ssm CUDA kernels if installed, else pure-torch
+  # Frequency-domain branch
+  freq_hidden: 128
+  freq_dropout: 0.1
+  freq_sparsity: 0.0         # 0..1 fraction of high frequencies to zero out
+  freq_encoder: linear       # {linear, mamba} spectral encoder
+                             #   linear: dense complex filter over bins (cheap baseline)
+                             #   mamba:  bidirectional selective SSM over bins
+                             #           (reuses the mamba_* settings below)
+  freq_backbone: none        # {none, fits}. fits = FITS-style spectral linear
+                             # forecast backbone in the freq branch (zero-init)
+  channel_mixer_layers: 1    # >0: BiMamba across the variate dim in each
+                             # branch (cross-channel dependencies); 0 = off
+  # Fusion
+  fusion: gated              # {gated, sum, concat, residual, affine,
+                             #  doubly_residual, time_only, freq_only}
+                             # CONVEX (gated/sum/concat): y is confined to the
+                             #   segment between the two branch forecasts, so
+                             #   the branches act as substitutes -- they cannot
+                             #   superpose (e.g. trend + spectral peak).
+                             # ADDITIVE (residual/affine/doubly_residual): the
+                             #   branches may superpose. All start at the pure
+                             #   time-branch forecast, so the initialization
+                             #   story is unchanged.
+                             #   residual        y = y_t + alpha * y_f (scalar)
+                             #   affine          y = g_t*y_t + g_f*y_f, no
+                             #                   sum-to-one constraint
+                             #   doubly_residual y = y_t + phi(feat) * y_f
+  head_dropout: 0.1
+
+  # Normalization
+  use_revin: true            # instance (RevIN) normalization on/off
+  revin_alpha: fixed         # {fixed, learned, channel} -- alpha-RevIN.
+                             # Blends normalized and raw input:
+                             #   x_norm = a*(x-mu)/sigma + (1-a)*x
+                             # a=1 is standard RevIN, a=0 is no normalization,
+                             # so the on/off switch is the two endpoints of a
+                             # continuum. 'learned'/'channel' fit a on the
+                             # TRAINING data, so normalization strength no
+                             # longer has to be picked per dataset by looking
+                             # at a test-set ablation.
+  revin_alpha_init: 1.0      # initial (or, for 'fixed', the constant) alpha
+
+  # Initialization controls. null inherits the legacy global zero_init switch;
+  # explicit true/false isolates one initialization choice for ablation.
+  time_zero_init_head: null
+  freq_zero_init_backbone: null
+  fusion_zero_init: null
+
+train:
+  device: auto               # {auto, cuda, cpu}
+  epochs: 30
+  batch_size: 32
+  lr: 0.001
+  weight_decay: 0.0001
+  loss: mse                  # {mse, mae, huber}
+  grad_clip: 5.0
+  num_workers: 4
+  patience: 10               # early-stopping patience (epochs)
+  min_delta: 0.0             # min val-loss improvement to reset patience
+  amp: true                  # mixed precision (recommended on GPU)
+  noise_level: 0.0           # test-time Gaussian noise sigma on standardized
+                             # input windows (robustness analysis, see
+                             # scripts/robustness/). 0 = off; training and
+                             # validation inputs are never corrupted.
+  lr_scheduler: cosine       # {none, cosine, cosine_warmup, step, halve}
+                             # NOTE on 'halve' (lr = base * 0.5^(epoch-1)): the
+                             # total learning budget is the geometric series
+                             # sum(0.5^k) = 2*base, i.e. BOUNDED no matter how
+                             # many epochs run, and only ~4 epochs exceed 10%
+                             # of the base rate. That looks like undertraining
+                             # -- train loss is still falling at the last epoch
+                             # -- but it was TESTED and it is not. On
+                             # electricity, cosine_warmup over 30 epochs (~5x
+                             # the budget) cut TRAIN loss by 16-31% with no
+                             # test gain at any horizon (avg 0.169 -> 0.171):
+                             # results/schedule_sweep_electricity.json. The
+                             # aggressive decay acts as an implicit regularizer;
+                             # the limit is generalization, not optimization.
+                             # Keep 'halve' unless a sweep says otherwise.
+  # warmup_epochs: 1.0       # cosine_warmup only: linear warmup length
+  # lr_min_frac: 0.0         # cosine_warmup only: final lr as a fraction of base
+                             #   halve: lr *= 0.5 per epoch (standard on ETT)
+  compile: false             # torch.compile (opt-in)

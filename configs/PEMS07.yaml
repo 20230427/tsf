@@ -1,0 +1,86 @@
+# PEMS07 — traffic flow, 5-min sampling (883 sensor channels).
+# Confirmatory dataset (review request): NOT used to tune DD-Mamba's design.
+# Protocol: 0.6/0.2/0.2 chronological split (iTransformer/S-Mamba), seq_len 96,
+# horizons {12, 24, 48, 96} -- the standard PEMS forecasting horizons, which
+# are SHORTER than the {96,192,336,720} used on the other benchmarks because
+# PEMS is sampled every 5 minutes (96 steps = 8 hours, not 4 days).
+# Provide the standard PEMS07.npz (key 'data', shape (T, N, F); feature 0 =
+# flow) at the csv_path below.
+
+experiment:
+  name: pems07
+  seed: 2024
+  checkpoint_dir: checkpoints
+
+data:
+  source: npz
+  csv_path: data/PEMS07.npz
+  npz_key: data
+  npz_feature: 0            # 0 = traffic flow
+  target_columns: null
+  seq_len: 96              # look-back stays 96 (8 hours at 5-min sampling)
+  pred_len: 12             # sweep {12, 24, 48, 96} via --data.pred_len
+  train_ratio: 0.6
+  val_ratio: 0.2
+  scale: true
+
+model:
+  d_model: 256               # Parameter-reduced (was 512): the variate mixer
+                             # dominates params and scales with d_model^2, so
+                             # 512->256 cuts the model ~4x. With mixer_placement
+                             # =shared this is ~2.9M (vs ~19.7M at d512+both).
+                             # A smaller width also lowers the activation
+                             # magnitudes that made this large-channel dataset
+                             # overflow under fp16 AMP.
+  time_kernel_size: 25
+  time_dropout: 0.1
+  time_encoder: mlp          # S-Mamba recipe: MLP over time, Mamba over variates
+  mamba_layers: 2
+  mamba_d_state: 32
+  mamba_d_conv: 4
+  mamba_expand: 2
+  use_official_mamba: true
+  freq_hidden: 256           # match d_model (reduced from 512)
+  freq_dropout: 0.1
+  freq_sparsity: 0.0
+  freq_encoder: linear
+  channel_mixer_layers: 2
+  mixer_placement: shared    # weight-tie one mixer across branches: ~5.3M -> ~2.9M
+  fusion: gated
+  head_dropout: 0.1
+  # Baseline sweeps read these (scripts/run_unified_baselines.py):
+  baseline_d_model: 256
+  baseline_layers: 2
+
+train:
+  device: auto
+  epochs: 30
+  batch_size: 16
+  lr: 0.0005                 # RESTORED from 2e-4. The 2e-4 was set to stop the
+                             # NaN divergence, but the actual cause was fp16
+                             # AMP overflow, which `amp: false` below already
+                             # fixes. Combined with the bounded `halve` budget,
+                             # 2e-4 left PEMS03/07 UNDERFITTING (train loss >=
+                             # val loss -- the model was not even fitting the
+                             # training split). grad_clip 5.0 + warmup guard
+                             # stability at this rate.
+  weight_decay: 0.0001
+  loss: mse
+  grad_clip: 5.0
+  num_workers: 4
+  patience: 6
+  amp: false                 # DISABLED: fp16 AMP overflowed the variate mixer on
+                             # this large-channel dataset (NaN loss). The Mamba
+                             # scan already runs in fp32, so AMP gave little speedup.
+  lr_scheduler: cosine_warmup
+  warmup_epochs: 2           # `halve` caps the total budget at 2x base lr no
+                             # matter the epoch count, and on PEMS it drove lr
+                             # to 1e-13: PEMS03 H=24 ran 30 epochs with the
+                             # train loss frozen at 0.0859 from epoch 9 onward,
+                             # i.e. 21 epochs of zero progress. Unlike
+                             # electricity (which OVERFITS, so a larger budget
+                             # does not help -- see SCHEDULE_SWEEP_RESULT.md),
+                             # PEMS03/07 underfit and have room to use it.
+                             # Early stopping on validation still guards the
+                             # horizons that do overfit (notably PEMS08).
+  compile: false

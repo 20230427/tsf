@@ -1,0 +1,52 @@
+# Exchange-Rate — daily FX of 8 countries (8 channels, 7,588 rows)
+# The smallest and least periodic benchmark: near-random-walk behavior, so the
+# main risk is overfitting. Small model, strong dropout, few epochs; the
+# instance normalization (RevIN) in the model does most of the heavy lifting.
+# Standard split: 0.7 / 0.1 / 0.2. Horizons: pred_len in {96, 192, 336, 720}.
+
+experiment:
+  name: exchange_rate
+  seed: 2024
+  checkpoint_dir: checkpoints
+
+data:
+  source: csv
+  csv_path: data/exchange_rate.csv
+  target_columns: null
+  seq_len: 96
+  pred_len: 96
+  train_ratio: 0.7
+  val_ratio: 0.1
+  scale: true
+
+model:
+  d_model: 64                # small dataset -> small model
+  time_kernel_size: 25
+  time_dropout: 0.3
+  time_encoder: mamba
+  mamba_layers: 1
+  mamba_d_state: 8
+  mamba_d_conv: 4
+  mamba_expand: 2
+  use_official_mamba: true
+  freq_hidden: 64
+  freq_dropout: 0.3
+  freq_sparsity: 0.5         # aggressive low-pass: little true periodicity
+  freq_encoder: linear
+  channel_mixer_layers: 0  # near-random-walk: keep channel-independent
+  fusion: gated
+  head_dropout: 0.3
+
+train:
+  device: auto
+  epochs: 10
+  batch_size: 32
+  lr: 0.0001
+  weight_decay: 0.0005
+  loss: mse
+  grad_clip: 5.0
+  num_workers: 4
+  patience: 3
+  amp: true
+  lr_scheduler: halve      # lr *= 0.5 each epoch; converges before patience can misfire
+  compile: false

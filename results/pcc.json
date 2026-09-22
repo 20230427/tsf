@@ -1,0 +1,50 @@
+{
+  "ETTh1": {
+    "channels": 7,
+    "mean_abs_pcc": 0.31101311769968243,
+    "median_abs_pcc": 0.232797051376421,
+    "frac_gt_0.6": 0.14285714285714285
+  },
+  "ETTh2": {
+    "channels": 7,
+    "mean_abs_pcc": 0.34882330496431674,
+    "median_abs_pcc": 0.32011173967165124,
+    "frac_gt_0.6": 0.23809523809523808
+  },
+  "ETTm1": {
+    "channels": 7,
+    "mean_abs_pcc": 0.3137923199481709,
+    "median_abs_pcc": 0.2394844696202828,
+    "frac_gt_0.6": 0.14285714285714285
+  },
+  "ETTm2": {
+    "channels": 7,
+    "mean_abs_pcc": 0.3489001910744577,
+    "median_abs_pcc": 0.32077785728955466,
+    "frac_gt_0.6": 0.23809523809523808
+  },
+  "solar": {
+    "channels": 137,
+    "mean_abs_pcc": 0.9138259093150647,
+    "median_abs_pcc": 0.9136798015214791,
+    "frac_gt_0.6": 1.0
+  },
+  "electricity": {
+    "channels": 321,
+    "mean_abs_pcc": 0.49725166195015424,
+    "median_abs_pcc": 0.47519962828696294,
+    "frac_gt_0.6": 0.3919392523364486
+  },
+  "traffic": {
+    "channels": 862,
+    "mean_abs_pcc": 0.5788925865387744,
+    "median_abs_pcc": 0.6078430037963297,
+    "frac_gt_0.6": 0.5166306916632308
+  },
+  "exchange_rate": {
+    "channels": 8,
+    "mean_abs_pcc": 0.48357582040770214,
+    "median_abs_pcc": 0.5253761923923502,
+    "frac_gt_0.6": 0.4642857142857143
+  }
+}

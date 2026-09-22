@@ -1,0 +1,53 @@
+# ETTm2 — Electricity Transformer Temperature, 15-min (7 channels, 69,680 rows)
+# Like ETTm1 but noisier -> a bit more dropout + mild low-pass filtering.
+# Standard ETT split: 0.6 / 0.2 / 0.2. Horizons: pred_len in {96,192,336,720}.
+
+experiment:
+  name: ETTm2
+  seed: 2024
+  checkpoint_dir: checkpoints
+
+data:
+  source: csv
+  csv_path: data/ETTm2.csv
+  target_columns: null
+  seq_len: 96
+  pred_len: 96
+  train_ratio: 0.6
+  val_ratio: 0.2
+  scale: true
+  split_protocol: ETTm        # canonical 12/4/4-month borders; tail rows unused
+
+model:
+  d_model: 128
+  time_kernel_size: 25
+  time_dropout: 0.2
+  time_encoder: mamba
+  mamba_layers: 1
+  mamba_d_state: 16
+  mamba_d_conv: 4
+  mamba_expand: 2
+  use_official_mamba: true
+  freq_hidden: 128
+  freq_dropout: 0.2
+  freq_sparsity: 0.2
+  freq_encoder: linear
+  channel_mixer_layers: 0  # OFF: 7 channels + tiny train set -> the mixer
+                           # only adds overfitting capacity on ETT
+  fusion: gated
+  head_dropout: 0.2
+
+train:
+  device: auto
+  epochs: 10
+  batch_size: 32
+  lr: 0.0001
+  weight_decay: 0.0002
+  loss: mse
+  grad_clip: 5.0
+  num_workers: 4
+  patience: 10
+  min_delta: 0.0
+  amp: true
+  lr_scheduler: halve      # lr *= 0.5 each epoch (standard ETT recipe)
+  compile: false

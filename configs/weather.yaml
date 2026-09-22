@@ -1,0 +1,65 @@
+# Weather — 21 meteorological indicators, 10-min (21 channels, 52,696 rows)
+# Standard split: 0.7 / 0.1 / 0.2. Horizons: pred_len in {96, 192, 336, 720}.
+# Strong multi-scale periodicity (daily + yearly) -> frequency branch matters;
+# try freq_encoder: mamba here as the first A/B candidate.
+
+experiment:
+  name: weather
+  seed: 2024
+  checkpoint_dir: checkpoints
+
+data:
+  source: csv
+  csv_path: data/weather.csv
+  target_columns: null
+  seq_len: 96
+  pred_len: 96
+  train_ratio: 0.7
+  val_ratio: 0.1
+  scale: true
+
+model:
+  d_model: 256               # sized to 21 variates / 37K windows
+  time_kernel_size: 25
+  time_dropout: 0.1
+  time_encoder: mamba        # weather needs a real sequence model: at 10-min
+                             # sampling the daily cycle (144 samples) exceeds
+                             # seq_len 96, so the freq branch can't capture it
+                             # -- local temporal dynamics carry the accuracy.
+                             # 21 channels x d256 keeps the scan affordable
+                             # (~6-8 GB; halve batch_size if OOM)
+  mamba_layers: 2
+  mamba_d_state: 16
+  mamba_d_conv: 4
+  mamba_expand: 2
+  use_official_mamba: true
+  freq_hidden: 256
+  freq_dropout: 0.1
+  freq_sparsity: 0.0
+  freq_encoder: linear
+  freq_backbone: fits        # linear-in-frequency anchor (strong on weather)
+  channel_mixer_layers: 2  # multi-layer variate mixing (top-model depth)
+  mixer_placement: both    # REVERTED from 'shared'. Tying the mixer (5.77M ->
+                           # 3.49M) was measured to cost +0.0013 avg MSE here
+                           # (0.2485 -> 0.2497), concentrated at H=720
+                           # (0.352 -> 0.356). That is small but it erases the
+                           # Weather margin over PatchTST, which was already a
+                           # statistical tie. Weather's two branches evidently
+                           # want *different* cross-channel mixing, so untied
+                           # mixers are kept. See BOTTLENECK_ANALYSIS.md.
+  fusion: gated
+  head_dropout: 0.1
+
+train:
+  device: auto
+  epochs: 10
+  batch_size: 32
+  lr: 0.0002                 # more LR-integral for the linear anchors + encoder
+  weight_decay: 0.0001
+  loss: mse
+  grad_clip: 5.0
+  num_workers: 4
+  patience: 5
+  amp: true
+  lr_scheduler: halve      # lr *= 0.5 each epoch; converges before patience can misfire
+  compile: false

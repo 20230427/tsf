@@ -1,0 +1,80 @@
+{
+ "config": "configs/electricity.yaml",
+ "dataset": "electricity",
+ "seeds": 1,
+ "conclusion": "halve vindicated; larger budget lowers train loss 16-31% with no test gain -> the limit is generalization, not optimization",
+ "rows": [
+  {
+   "arm": "halve",
+   "horizon": 96,
+   "seed_offset": 0,
+   "test_mse": 0.1401,
+   "test_mae": 0.2358,
+   "final_train_loss": 0.1023,
+   "best_val_loss": 0.1184
+  },
+  {
+   "arm": "halve",
+   "horizon": 192,
+   "seed_offset": 0,
+   "test_mse": 0.1588,
+   "test_mae": 0.2537,
+   "final_train_loss": 0.1187,
+   "best_val_loss": 0.1356
+  },
+  {
+   "arm": "halve",
+   "horizon": 336,
+   "seed_offset": 0,
+   "test_mse": 0.174,
+   "test_mae": 0.2702,
+   "final_train_loss": 0.1337,
+   "best_val_loss": 0.1558
+  },
+  {
+   "arm": "halve",
+   "horizon": 720,
+   "seed_offset": 0,
+   "test_mse": 0.2033,
+   "test_mae": 0.2991,
+   "final_train_loss": 0.1514,
+   "best_val_loss": 0.2005
+  },
+  {
+   "arm": "cosine_warmup_30",
+   "horizon": 96,
+   "seed_offset": 0,
+   "test_mse": 0.1402,
+   "test_mae": 0.2352,
+   "final_train_loss": 0.0858,
+   "best_val_loss": 0.1184
+  },
+  {
+   "arm": "cosine_warmup_30",
+   "horizon": 192,
+   "seed_offset": 0,
+   "test_mse": 0.1612,
+   "test_mae": 0.2545,
+   "final_train_loss": 0.0822,
+   "best_val_loss": 0.1374
+  },
+  {
+   "arm": "cosine_warmup_30",
+   "horizon": 336,
+   "seed_offset": 0,
+   "test_mse": 0.179,
+   "test_mae": 0.2737,
+   "final_train_loss": 0.0952,
+   "best_val_loss": 0.1546
+  },
+  {
+   "arm": "cosine_warmup_30",
+   "horizon": 720,
+   "seed_offset": 0,
+   "test_mse": 0.2045,
+   "test_mae": 0.2975,
+   "final_train_loss": 0.1168,
+   "best_val_loss": 0.1969
+  }
+ ]
+}

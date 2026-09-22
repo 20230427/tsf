@@ -1,0 +1,63 @@
+# Illness — National ILI (CDC influenza-like illness), weekly (7 channels, 966 rows).
+# Smallest benchmark in the suite: train 676 / val 97 / test 193 rows, with the
+# largest per-channel scale spread (~266,000x std ratio) of all datasets
+# (documents/datasets.md sec. 3.2) -> per-channel standardization + RevIN are
+# mandatory. Weekly sampling + tiny sample -> seq_len 36, horizons {24,36,48,60}
+# (community convention, documents/datasets.md sec. 3).
+#
+# NOT a tuned recipe: Illness has never been run in this repo before (no HPO
+# history, no Main_*.json). The settings below follow the conservative
+# small-data pattern proven on ETTh2 (narrow model, mixer off, heavy dropout,
+# low-pass sparsity, 'halve' LR schedule) and serve as the Full baseline for
+# the cumulative ablation. Revisit before any paper claim.
+
+experiment:
+  name: illness
+  seed: 2024
+  checkpoint_dir: checkpoints
+
+data:
+  source: csv
+  csv_path: data/illness/national_illness.csv   # .pt cache co-located by loader
+  target_columns: null
+  seq_len: 36                # community convention for weekly ILI
+  pred_len: 24               # sweep {24, 36, 48, 60} via --data.pred_len
+  train_ratio: 0.7
+  val_ratio: 0.1
+  scale: true                # per-channel StandardScaler fitted on train only
+
+model:
+  d_model: 128               # 676 train rows cannot support wider stacks
+  time_kernel_size: 25
+  time_dropout: 0.3
+  time_encoder: mamba
+  mamba_layers: 1            # single block: capacity budget for 676 rows
+  mamba_d_state: 16
+  mamba_d_conv: 4
+  mamba_expand: 2
+  use_official_mamba: true
+  freq_hidden: 128
+  freq_dropout: 0.3
+  freq_sparsity: 0.3         # low-pass: weekly data, high bins are noise
+  freq_encoder: linear
+  freq_backbone: none        # 36-point windows give 36 bins: too few for FITS
+                             # to shine; keep the dense spectral filter only
+  channel_mixer_layers: 0    # OFF: 7 channels + tiny train set -> the mixer
+                             # only adds overfitting capacity (same call as ETT)
+  fusion: gated
+  head_dropout: 0.3
+
+train:
+  device: auto
+  epochs: 20
+  batch_size: 16             # ~40 train windows; keep batches small
+  lr: 0.0005
+  weight_decay: 0.0005
+  loss: mse
+  grad_clip: 5.0
+  num_workers: 4
+  patience: 6
+  min_delta: 0.0
+  amp: true
+  lr_scheduler: halve      # lr *= 0.5 each epoch; bounded budget vs overfit
+  compile: false

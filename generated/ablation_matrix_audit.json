@@ -1,0 +1,3225 @@
+{
+  "schema_version": "1.0",
+  "analysis_type": "ablation_matrix_paired_audit",
+  "difference_definition": "variant_minus_full; positive favors the full model",
+  "primary_endpoint": "per-seed arithmetic mean MSE across requested horizons",
+  "horizons": [
+    96,
+    192,
+    336,
+    720
+  ],
+  "families": [
+    {
+      "id": "horizon_average_primary.component_removal",
+      "description": "component_removal contrasts in the horizon_average_primary analysis",
+      "size": 4,
+      "members": [
+        "horizon_average_primary|component_removal|ETTh2|avg|freq_only",
+        "horizon_average_primary|component_removal|ETTh2|avg|no_linear_backbone",
+        "horizon_average_primary|component_removal|ETTh2|avg|no_revin",
+        "horizon_average_primary|component_removal|ETTh2|avg|time_only"
+      ],
+      "raw_p_value_field": "statistics.p_value_raw",
+      "bh_q_value_field": "multiplicity.horizon_average_primary.component_removal.q_bh",
+      "sensitivity_p_value_field": "statistics.exact_sign_flip_p_two_sided",
+      "sensitivity_bh_q_value_field": "multiplicity.horizon_average_primary.component_removal.q_bh_exact_sign_flip"
+    },
+    {
+      "id": "horizon_average_primary.encoder_replacement",
+      "description": "encoder_replacement contrasts in the horizon_average_primary analysis",
+      "size": 1,
+      "members": [
+        "horizon_average_primary|encoder_replacement|ETTh2|avg|time_mlp"
+      ],
+      "raw_p_value_field": "statistics.p_value_raw",
+      "bh_q_value_field": "multiplicity.horizon_average_primary.encoder_replacement.q_bh",
+      "sensitivity_p_value_field": "statistics.exact_sign_flip_p_two_sided",
+      "sensitivity_bh_q_value_field": "multiplicity.horizon_average_primary.encoder_replacement.q_bh_exact_sign_flip"
+    },
+    {
+      "id": "horizon_average_primary.fusion_strategy",
+      "description": "fusion_strategy contrasts in the horizon_average_primary analysis",
+      "size": 1,
+      "members": [
+        "horizon_average_primary|fusion_strategy|ETTh2|avg|fusion_sum"
+      ],
+      "raw_p_value_field": "statistics.p_value_raw",
+      "bh_q_value_field": "multiplicity.horizon_average_primary.fusion_strategy.q_bh",
+      "sensitivity_p_value_field": "statistics.exact_sign_flip_p_two_sided",
+      "sensitivity_bh_q_value_field": "multiplicity.horizon_average_primary.fusion_strategy.q_bh_exact_sign_flip"
+    },
+    {
+      "id": "horizon_average_primary.spectral_strategy",
+      "description": "spectral_strategy contrasts in the horizon_average_primary analysis",
+      "size": 1,
+      "members": [
+        "horizon_average_primary|spectral_strategy|ETTh2|avg|freq_mamba"
+      ],
+      "raw_p_value_field": "statistics.p_value_raw",
+      "bh_q_value_field": "multiplicity.horizon_average_primary.spectral_strategy.q_bh",
+      "sensitivity_p_value_field": "statistics.exact_sign_flip_p_two_sided",
+      "sensitivity_bh_q_value_field": "multiplicity.horizon_average_primary.spectral_strategy.q_bh_exact_sign_flip"
+    },
+    {
+      "id": "per_horizon.component_removal",
+      "description": "component_removal contrasts in the per_horizon analysis",
+      "size": 16,
+      "members": [
+        "per_horizon|component_removal|ETTh2|h96|freq_only",
+        "per_horizon|component_removal|ETTh2|h192|freq_only",
+        "per_horizon|component_removal|ETTh2|h336|freq_only",
+        "per_horizon|component_removal|ETTh2|h720|freq_only",
+        "per_horizon|component_removal|ETTh2|h96|no_linear_backbone",
+        "per_horizon|component_removal|ETTh2|h192|no_linear_backbone",
+        "per_horizon|component_removal|ETTh2|h336|no_linear_backbone",
+        "per_horizon|component_removal|ETTh2|h720|no_linear_backbone",
+        "per_horizon|component_removal|ETTh2|h96|no_revin",
+        "per_horizon|component_removal|ETTh2|h192|no_revin",
+        "per_horizon|component_removal|ETTh2|h336|no_revin",
+        "per_horizon|component_removal|ETTh2|h720|no_revin",
+        "per_horizon|component_removal|ETTh2|h96|time_only",
+        "per_horizon|component_removal|ETTh2|h192|time_only",
+        "per_horizon|component_removal|ETTh2|h336|time_only",
+        "per_horizon|component_removal|ETTh2|h720|time_only"
+      ],
+      "raw_p_value_field": "statistics.p_value_raw",
+      "bh_q_value_field": "multiplicity.per_horizon.component_removal.q_bh",
+      "sensitivity_p_value_field": "statistics.exact_sign_flip_p_two_sided",
+      "sensitivity_bh_q_value_field": "multiplicity.per_horizon.component_removal.q_bh_exact_sign_flip"
+    },
+    {
+      "id": "per_horizon.encoder_replacement",
+      "description": "encoder_replacement contrasts in the per_horizon analysis",
+      "size": 4,
+      "members": [
+        "per_horizon|encoder_replacement|ETTh2|h96|time_mlp",
+        "per_horizon|encoder_replacement|ETTh2|h192|time_mlp",
+        "per_horizon|encoder_replacement|ETTh2|h336|time_mlp",
+        "per_horizon|encoder_replacement|ETTh2|h720|time_mlp"
+      ],
+      "raw_p_value_field": "statistics.p_value_raw",
+      "bh_q_value_field": "multiplicity.per_horizon.encoder_replacement.q_bh",
+      "sensitivity_p_value_field": "statistics.exact_sign_flip_p_two_sided",
+      "sensitivity_bh_q_value_field": "multiplicity.per_horizon.encoder_replacement.q_bh_exact_sign_flip"
+    },
+    {
+      "id": "per_horizon.fusion_strategy",
+      "description": "fusion_strategy contrasts in the per_horizon analysis",
+      "size": 4,
+      "members": [
+        "per_horizon|fusion_strategy|ETTh2|h96|fusion_sum",
+        "per_horizon|fusion_strategy|ETTh2|h192|fusion_sum",
+        "per_horizon|fusion_strategy|ETTh2|h336|fusion_sum",
+        "per_horizon|fusion_strategy|ETTh2|h720|fusion_sum"
+      ],
+      "raw_p_value_field": "statistics.p_value_raw",
+      "bh_q_value_field": "multiplicity.per_horizon.fusion_strategy.q_bh",
+      "sensitivity_p_value_field": "statistics.exact_sign_flip_p_two_sided",
+      "sensitivity_bh_q_value_field": "multiplicity.per_horizon.fusion_strategy.q_bh_exact_sign_flip"
+    },
+    {
+      "id": "per_horizon.spectral_strategy",
+      "description": "spectral_strategy contrasts in the per_horizon analysis",
+      "size": 4,
+      "members": [
+        "per_horizon|spectral_strategy|ETTh2|h96|freq_mamba",
+        "per_horizon|spectral_strategy|ETTh2|h192|freq_mamba",
+        "per_horizon|spectral_strategy|ETTh2|h336|freq_mamba",
+        "per_horizon|spectral_strategy|ETTh2|h720|freq_mamba"
+      ],
+      "raw_p_value_field": "statistics.p_value_raw",
+      "bh_q_value_field": "multiplicity.per_horizon.spectral_strategy.q_bh",
+      "sensitivity_p_value_field": "statistics.exact_sign_flip_p_two_sided",
+      "sensitivity_bh_q_value_field": "multiplicity.per_horizon.spectral_strategy.q_bh_exact_sign_flip"
+    }
+  ],
+  "rows": [
+    {
+      "id": "per_horizon|spectral_strategy|ETTh2|h96|freq_mamba",
+      "scope": "per_horizon",
+      "family": "spectral_strategy",
+      "dataset": "ETTh2",
+      "horizon": 96,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "freq_mamba",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.2922987639904022,
+          "comparator": 0.2922847270965576,
+          "paired_difference": -1.4036893844604492e-05
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.29243165254592896,
+          "comparator": 0.2907310426235199,
+          "paired_difference": -0.0017006099224090576
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.2955000698566437,
+          "comparator": 0.28970715403556824,
+          "paired_difference": -0.0057929158210754395
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.2890491783618927,
+          "comparator": 0.2870105504989624,
+          "paired_difference": -0.002038627862930298
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.29551857709884644,
+          "comparator": 0.29704150557518005,
+          "paired_difference": 0.0015229284763336182
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.29376301169395447,
+          "comparator": 0.29358795285224915,
+          "paired_difference": -0.00017505884170532227
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.29309354225794476,
+        "mean_comparator": 0.2917271554470062,
+        "mean_paired_difference": -0.0013663868109385173,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.0025200804612398185,
+        "standard_error": 0.0010288185401325393,
+        "ci95": {
+          "low": -0.0040110490623690865,
+          "high": 0.0012782754404920516,
+          "method": "t"
+        },
+        "t_statistic": -1.3281125462246144,
+        "df": 5,
+        "p_value_raw": 0.24153521258665167,
+        "exact_sign_flip_p_two_sided": 0.15625,
+        "relative_effect_percent": -0.46619478560056177,
+        "standardized_effect_dz": -0.542199676539807,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.spectral_strategy": {
+          "family_size": 4,
+          "q_bh": 0.4544281551603735,
+          "q_bh_exact_sign_flip": 0.46875
+        }
+      }
+    },
+    {
+      "id": "per_horizon|spectral_strategy|ETTh2|h192|freq_mamba",
+      "scope": "per_horizon",
+      "family": "spectral_strategy",
+      "dataset": "ETTh2",
+      "horizon": 192,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "freq_mamba",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.3675609529018402,
+          "comparator": 0.3738749623298645,
+          "paired_difference": 0.006314009428024292
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.36538630723953247,
+          "comparator": 0.3777623474597931,
+          "paired_difference": 0.01237604022026062
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.3718629479408264,
+          "comparator": 0.36515191197395325,
+          "paired_difference": -0.006711035966873169
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.3733803629875183,
+          "comparator": 0.3736616373062134,
+          "paired_difference": 0.00028127431869506836
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.37274429202079773,
+          "comparator": 0.37506094574928284,
+          "paired_difference": 0.0023166537284851074
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.36655566096305847,
+          "comparator": 0.3650653064250946,
+          "paired_difference": -0.0014903545379638672
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.36958175400892895,
+        "mean_comparator": 0.37176285187403363,
+        "mean_paired_difference": 0.0021810978651046753,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.0065908287695138805,
+        "standard_error": 0.0026906945778940876,
+        "ci95": {
+          "low": -0.004735552742074968,
+          "high": 0.009097748472284319,
+          "method": "t"
+        },
+        "t_statistic": 0.8106077453100397,
+        "df": 5,
+        "p_value_raw": 0.4544281551603735,
+        "exact_sign_flip_p_two_sided": 0.46875,
+        "relative_effect_percent": 0.5901530152519329,
+        "standardized_effect_dz": 0.3309292262595902,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.spectral_strategy": {
+          "family_size": 4,
+          "q_bh": 0.4544281551603735,
+          "q_bh_exact_sign_flip": 0.46875
+        }
+      }
+    },
+    {
+      "id": "per_horizon|spectral_strategy|ETTh2|h336|freq_mamba",
+      "scope": "per_horizon",
+      "family": "spectral_strategy",
+      "dataset": "ETTh2",
+      "horizon": 336,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "freq_mamba",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.4152366816997528,
+          "comparator": 0.4238187074661255,
+          "paired_difference": 0.00858202576637268
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.4124421179294586,
+          "comparator": 0.4104613959789276,
+          "paired_difference": -0.001980721950531006
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.41501957178115845,
+          "comparator": 0.4128226041793823,
+          "paired_difference": -0.002196967601776123
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.4240671694278717,
+          "comparator": 0.4212837219238281,
+          "paired_difference": -0.002783447504043579
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.41419094800949097,
+          "comparator": 0.4205896854400635,
+          "paired_difference": 0.00639873743057251
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.4150605797767639,
+          "comparator": 0.41777005791664124,
+          "paired_difference": 0.0027094781398773193
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.4160028447707494,
+        "mean_comparator": 0.4177910288174947,
+        "mean_paired_difference": 0.0017881840467453003,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.004883608742245772,
+        "standard_error": 0.0019937249203162127,
+        "ci95": {
+          "low": -0.003336849018675,
+          "high": 0.006913217112165601,
+          "method": "t"
+        },
+        "t_statistic": 0.8969061020021193,
+        "df": 5,
+        "p_value_raw": 0.41087045537540723,
+        "exact_sign_flip_p_two_sided": 0.4375,
+        "relative_effect_percent": 0.42984899483817995,
+        "standardized_effect_dz": 0.36616038284897234,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.spectral_strategy": {
+          "family_size": 4,
+          "q_bh": 0.4544281551603735,
+          "q_bh_exact_sign_flip": 0.46875
+        }
+      }
+    },
+    {
+      "id": "per_horizon|spectral_strategy|ETTh2|h720|freq_mamba",
+      "scope": "per_horizon",
+      "family": "spectral_strategy",
+      "dataset": "ETTh2",
+      "horizon": 720,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "freq_mamba",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.4230939745903015,
+          "comparator": 0.4213133752346039,
+          "paired_difference": -0.0017805993556976318
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.42140519618988037,
+          "comparator": 0.4200165867805481,
+          "paired_difference": -0.0013886094093322754
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.41966861486434937,
+          "comparator": 0.4237818419933319,
+          "paired_difference": 0.004113227128982544
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.42598775029182434,
+          "comparator": 0.42411670088768005,
+          "paired_difference": -0.0018710494041442871
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.4347621202468872,
+          "comparator": 0.4175584316253662,
+          "paired_difference": -0.017203688621520996
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.42325130105018616,
+          "comparator": 0.42032742500305176,
+          "paired_difference": -0.0029238760471343994
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.4246948262055715,
+        "mean_comparator": 0.42118572692076367,
+        "mean_paired_difference": -0.003509099284807841,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.007157534771497341,
+        "standard_error": 0.0029220513343994462,
+        "ci95": {
+          "low": -0.01102047136781189,
+          "high": 0.00400227279819621,
+          "method": "t"
+        },
+        "t_statistic": -1.2009026821320534,
+        "df": 5,
+        "p_value_raw": 0.2835704800083555,
+        "exact_sign_flip_p_two_sided": 0.28125,
+        "relative_effect_percent": -0.8262637235682447,
+        "standardized_effect_dz": -0.49026646699387877,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.spectral_strategy": {
+          "family_size": 4,
+          "q_bh": 0.4544281551603735,
+          "q_bh_exact_sign_flip": 0.46875
+        }
+      }
+    },
+    {
+      "id": "horizon_average_primary|spectral_strategy|ETTh2|avg|freq_mamba",
+      "scope": "horizon_average_primary",
+      "family": "spectral_strategy",
+      "dataset": "ETTh2",
+      "horizon": null,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "freq_mamba",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.3745475932955742,
+          "comparator": 0.3778229430317879,
+          "paired_difference": 0.003275349736213684
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.3729163184762001,
+          "comparator": 0.3747428432106972,
+          "paired_difference": 0.0018265247344970703
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.3755128011107445,
+          "comparator": 0.37286587804555893,
+          "paired_difference": -0.002646923065185547
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.37812111526727676,
+          "comparator": 0.376518152654171,
+          "paired_difference": -0.001602962613105774
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.3793039843440056,
+          "comparator": 0.37756264209747314,
+          "paired_difference": -0.0017413422465324402
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.37465763837099075,
+          "comparator": 0.3741876855492592,
+          "paired_difference": -0.0004699528217315674
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.37584324181079865,
+        "mean_comparator": 0.37561669076482457,
+        "mean_paired_difference": -0.00022655104597409567,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.0023058610351836535,
+        "standard_error": 0.0009413638256609601,
+        "ci95": {
+          "low": -0.002646403796943264,
+          "high": 0.0021933017049950722,
+          "method": "t"
+        },
+        "t_statistic": -0.2406625789078174,
+        "df": 5,
+        "p_value_raw": 0.8193732362682014,
+        "exact_sign_flip_p_two_sided": 0.84375,
+        "relative_effect_percent": -0.06027806829320151,
+        "standardized_effect_dz": -0.098250086417741,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "horizon_average_primary.spectral_strategy": {
+          "family_size": 1,
+          "q_bh": 0.8193732362682014,
+          "q_bh_exact_sign_flip": 0.84375
+        }
+      }
+    },
+    {
+      "id": "per_horizon|component_removal|ETTh2|h96|freq_only",
+      "scope": "per_horizon",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": 96,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "freq_only",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.2922987639904022,
+          "comparator": 0.2907044589519501,
+          "paired_difference": -0.0015943050384521484
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.29243165254592896,
+          "comparator": 0.2891485393047333,
+          "paired_difference": -0.0032831132411956787
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.2955000698566437,
+          "comparator": 0.2912192940711975,
+          "paired_difference": -0.004280775785446167
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.2890491783618927,
+          "comparator": 0.29019835591316223,
+          "paired_difference": 0.0011491775512695312
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.29551857709884644,
+          "comparator": 0.28871482610702515,
+          "paired_difference": -0.006803750991821289
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.29376301169395447,
+          "comparator": 0.28928372263908386,
+          "paired_difference": -0.0044792890548706055
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.29309354225794476,
+        "mean_comparator": 0.2898781994978587,
+        "mean_paired_difference": -0.0032153427600860596,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.002730962287784953,
+        "standard_error": 0.0011149106853094875,
+        "ci95": {
+          "low": -0.006081311916099456,
+          "high": -0.00034937360407266346,
+          "method": "t"
+        },
+        "t_statistic": -2.883946492264099,
+        "df": 5,
+        "p_value_raw": 0.03442910098070206,
+        "exact_sign_flip_p_two_sided": 0.0625,
+        "relative_effect_percent": -1.0970363711583626,
+        "standardized_effect_dz": -1.177366225256073,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.component_removal": {
+          "family_size": 16,
+          "q_bh": 0.11017312313824659,
+          "q_bh_exact_sign_flip": 0.16666666666666666
+        }
+      }
+    },
+    {
+      "id": "per_horizon|component_removal|ETTh2|h192|freq_only",
+      "scope": "per_horizon",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": 192,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "freq_only",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.3675609529018402,
+          "comparator": 0.36495333909988403,
+          "paired_difference": -0.0026076138019561768
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.36538630723953247,
+          "comparator": 0.36904749274253845,
+          "paired_difference": 0.0036611855030059814
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.3718629479408264,
+          "comparator": 0.3656468987464905,
+          "paired_difference": -0.0062160491943359375
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.3733803629875183,
+          "comparator": 0.36453431844711304,
+          "paired_difference": -0.008846044540405273
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.37274429202079773,
+          "comparator": 0.36548978090286255,
+          "paired_difference": -0.007254511117935181
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.36655566096305847,
+          "comparator": 0.36565300822257996,
+          "paired_difference": -0.0009026527404785156
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.36958175400892895,
+        "mean_comparator": 0.36588747302691144,
+        "mean_paired_difference": -0.003694280982017517,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.004661590765186763,
+        "standard_error": 0.0019030864607296272,
+        "ci95": {
+          "low": -0.008586320469614486,
+          "high": 0.0011977585055794517,
+          "method": "t"
+        },
+        "t_statistic": -1.9412050152472637,
+        "df": 5,
+        "p_value_raw": 0.1099010802455869,
+        "exact_sign_flip_p_two_sided": 0.15625,
+        "relative_effect_percent": -0.9995842440664061,
+        "standardized_effect_dz": -0.7924936289145725,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.component_removal": {
+          "family_size": 16,
+          "q_bh": 0.29306954732156504,
+          "q_bh_exact_sign_flip": 0.35714285714285715
+        }
+      }
+    },
+    {
+      "id": "per_horizon|component_removal|ETTh2|h336|freq_only",
+      "scope": "per_horizon",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": 336,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "freq_only",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.4152366816997528,
+          "comparator": 0.4120499789714813,
+          "paired_difference": -0.0031867027282714844
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.4124421179294586,
+          "comparator": 0.4127299189567566,
+          "paired_difference": 0.00028780102729797363
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.41501957178115845,
+          "comparator": 0.412921667098999,
+          "paired_difference": -0.002097904682159424
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.4240671694278717,
+          "comparator": 0.4116068184375763,
+          "paired_difference": -0.01246035099029541
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.41419094800949097,
+          "comparator": 0.41331323981285095,
+          "paired_difference": -0.0008777081966400146
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.4150605797767639,
+          "comparator": 0.4146937131881714,
+          "paired_difference": -0.0003668665885925293
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.4160028447707494,
+        "mean_comparator": 0.4128858894109726,
+        "mean_paired_difference": -0.003116955359776815,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.004743668475972895,
+        "standard_error": 0.001936594545843253,
+        "ci95": {
+          "low": -0.008095130122313825,
+          "high": 0.0018612194027601953,
+          "method": "t"
+        },
+        "t_statistic": -1.6095033245173147,
+        "df": 5,
+        "p_value_raw": 0.16842048770287368,
+        "exact_sign_flip_p_two_sided": 0.0625,
+        "relative_effect_percent": -0.7492629915774988,
+        "standardized_effect_dz": -0.6570769807300979,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.component_removal": {
+          "family_size": 16,
+          "q_bh": 0.38496111474942557,
+          "q_bh_exact_sign_flip": 0.16666666666666666
+        }
+      }
+    },
+    {
+      "id": "per_horizon|component_removal|ETTh2|h720|freq_only",
+      "scope": "per_horizon",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": 720,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "freq_only",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.4230939745903015,
+          "comparator": 0.4284474849700928,
+          "paired_difference": 0.00535351037979126
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.42140519618988037,
+          "comparator": 0.4218980371952057,
+          "paired_difference": 0.0004928410053253174
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.41966861486434937,
+          "comparator": 0.4216005802154541,
+          "paired_difference": 0.0019319653511047363
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.42598775029182434,
+          "comparator": 0.4217791259288788,
+          "paired_difference": -0.004208624362945557
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.4347621202468872,
+          "comparator": 0.4189060926437378,
+          "paired_difference": -0.015856027603149414
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.42325130105018616,
+          "comparator": 0.4210303723812103,
+          "paired_difference": -0.00222092866897583
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.4246948262055715,
+        "mean_comparator": 0.42227694888909656,
+        "mean_paired_difference": -0.0024178773164749146,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.007370445386659917,
+        "standard_error": 0.0030089717290611774,
+        "ci95": {
+          "low": -0.01015268538714275,
+          "high": 0.005316930754192921,
+          "method": "t"
+        },
+        "t_statistic": -0.8035560098895682,
+        "df": 5,
+        "p_value_raw": 0.4581358672510387,
+        "exact_sign_flip_p_two_sided": 0.59375,
+        "relative_effect_percent": -0.5693211141933132,
+        "standardized_effect_dz": -0.32805036732937926,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.component_removal": {
+          "family_size": 16,
+          "q_bh": 0.5649426069809526,
+          "q_bh_exact_sign_flip": 0.625
+        }
+      }
+    },
+    {
+      "id": "horizon_average_primary|component_removal|ETTh2|avg|freq_only",
+      "scope": "horizon_average_primary",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": null,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "freq_only",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.3745475932955742,
+          "comparator": 0.37403881549835205,
+          "paired_difference": -0.0005087777972221375
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.3729163184762001,
+          "comparator": 0.3732059970498085,
+          "paired_difference": 0.00028967857360839844
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.3755128011107445,
+          "comparator": 0.3728471100330353,
+          "paired_difference": -0.002665691077709198
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.37812111526727676,
+          "comparator": 0.3720296546816826,
+          "paired_difference": -0.006091460585594177
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.3793039843440056,
+          "comparator": 0.3716059848666191,
+          "paired_difference": -0.007697999477386475
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.37465763837099075,
+          "comparator": 0.3726652041077614,
+          "paired_difference": -0.00199243426322937
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.37584324181079865,
+        "mean_comparator": 0.37273212770620984,
+        "mean_paired_difference": -0.0031111141045888266,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.0031530738629814356,
+        "standard_error": 0.0012872370142684598,
+        "ci95": {
+          "low": -0.006420062191626044,
+          "high": 0.00019783398244839056,
+          "method": "t"
+        },
+        "t_statistic": -2.416892980937843,
+        "df": 5,
+        "p_value_raw": 0.06034833096168694,
+        "exact_sign_flip_p_two_sided": 0.0625,
+        "relative_effect_percent": -0.8277690692533397,
+        "standardized_effect_dz": -0.9866924277019844,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "horizon_average_primary.component_removal": {
+          "family_size": 4,
+          "q_bh": 0.12069666192337387,
+          "q_bh_exact_sign_flip": 0.125
+        }
+      }
+    },
+    {
+      "id": "per_horizon|fusion_strategy|ETTh2|h96|fusion_sum",
+      "scope": "per_horizon",
+      "family": "fusion_strategy",
+      "dataset": "ETTh2",
+      "horizon": 96,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "fusion_sum",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.2922987639904022,
+          "comparator": 0.28819993138313293,
+          "paired_difference": -0.004098832607269287
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.29243165254592896,
+          "comparator": 0.2839517593383789,
+          "paired_difference": -0.008479893207550049
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.2955000698566437,
+          "comparator": 0.2871227562427521,
+          "paired_difference": -0.008377313613891602
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.2890491783618927,
+          "comparator": 0.2884586751461029,
+          "paired_difference": -0.0005905032157897949
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.29551857709884644,
+          "comparator": 0.2844884693622589,
+          "paired_difference": -0.011030107736587524
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.29376301169395447,
+          "comparator": 0.29318925738334656,
+          "paired_difference": -0.0005737543106079102
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.29309354225794476,
+        "mean_comparator": 0.28756847480932873,
+        "mean_paired_difference": -0.005525067448616028,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.004428799923373139,
+        "standard_error": 0.0018080499975235717,
+        "ci95": {
+          "low": -0.010172807930172393,
+          "high": -0.0008773269670596636,
+          "method": "t"
+        },
+        "t_statistic": -3.055815633518728,
+        "df": 5,
+        "p_value_raw": 0.028236375824422604,
+        "exact_sign_flip_p_two_sided": 0.03125,
+        "relative_effect_percent": -1.8850867221610585,
+        "standardized_effect_dz": -1.2475315083567673,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.fusion_strategy": {
+          "family_size": 4,
+          "q_bh": 0.11294550329769042,
+          "q_bh_exact_sign_flip": 0.125
+        }
+      }
+    },
+    {
+      "id": "per_horizon|fusion_strategy|ETTh2|h192|fusion_sum",
+      "scope": "per_horizon",
+      "family": "fusion_strategy",
+      "dataset": "ETTh2",
+      "horizon": 192,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "fusion_sum",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.3675609529018402,
+          "comparator": 0.36782267689704895,
+          "paired_difference": 0.00026172399520874023
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.36538630723953247,
+          "comparator": 0.3713642656803131,
+          "paired_difference": 0.00597795844078064
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.3718629479408264,
+          "comparator": 0.35900354385375977,
+          "paired_difference": -0.01285940408706665
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.3733803629875183,
+          "comparator": 0.3786858320236206,
+          "paired_difference": 0.005305469036102295
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.37274429202079773,
+          "comparator": 0.36597004532814026,
+          "paired_difference": -0.006774246692657471
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.36655566096305847,
+          "comparator": 0.3586173355579376,
+          "paired_difference": -0.00793832540512085
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.36958175400892895,
+        "mean_comparator": 0.3669106165568034,
+        "mean_paired_difference": -0.0026711374521255493,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.007686538082889544,
+        "standard_error": 0.0031380160319250355,
+        "ci95": {
+          "low": -0.01073766446372757,
+          "high": 0.005395389559476471,
+          "method": "t"
+        },
+        "t_statistic": -0.8512185485830432,
+        "df": 5,
+        "p_value_raw": 0.43351197766535565,
+        "exact_sign_flip_p_two_sided": 0.375,
+        "relative_effect_percent": -0.7227460293023599,
+        "standardized_effect_dz": -0.34750851727015813,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.fusion_strategy": {
+          "family_size": 4,
+          "q_bh": 0.43351197766535565,
+          "q_bh_exact_sign_flip": 0.375
+        }
+      }
+    },
+    {
+      "id": "per_horizon|fusion_strategy|ETTh2|h336|fusion_sum",
+      "scope": "per_horizon",
+      "family": "fusion_strategy",
+      "dataset": "ETTh2",
+      "horizon": 336,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "fusion_sum",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.4152366816997528,
+          "comparator": 0.4059430956840515,
+          "paired_difference": -0.009293586015701294
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.4124421179294586,
+          "comparator": 0.4085671305656433,
+          "paired_difference": -0.0038749873638153076
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.41501957178115845,
+          "comparator": 0.4232483208179474,
+          "paired_difference": 0.00822874903678894
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.4240671694278717,
+          "comparator": 0.41840773820877075,
+          "paired_difference": -0.005659431219100952
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.41419094800949097,
+          "comparator": 0.41327598690986633,
+          "paired_difference": -0.0009149610996246338
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.4150605797767639,
+          "comparator": 0.40845170617103577,
+          "paired_difference": -0.006608873605728149
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.4160028447707494,
+        "mean_comparator": 0.4129823297262192,
+        "mean_paired_difference": -0.003020515044530233,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.0061790134791902184,
+        "standard_error": 0.002522571689632573,
+        "ci95": {
+          "low": -0.009504992008990115,
+          "high": 0.003463961919929649,
+          "method": "t"
+        },
+        "t_statistic": -1.1973951253572452,
+        "df": 5,
+        "p_value_raw": 0.28481796205054966,
+        "exact_sign_flip_p_two_sided": 0.28125,
+        "relative_effect_percent": -0.7260803820211318,
+        "standardized_effect_dz": -0.4888345129368583,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.fusion_strategy": {
+          "family_size": 4,
+          "q_bh": 0.4060288778433307,
+          "q_bh_exact_sign_flip": 0.375
+        }
+      }
+    },
+    {
+      "id": "per_horizon|fusion_strategy|ETTh2|h720|fusion_sum",
+      "scope": "per_horizon",
+      "family": "fusion_strategy",
+      "dataset": "ETTh2",
+      "horizon": 720,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "fusion_sum",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.4230939745903015,
+          "comparator": 0.419768363237381,
+          "paired_difference": -0.0033256113529205322
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.42140519618988037,
+          "comparator": 0.42189332842826843,
+          "paired_difference": 0.0004881322383880615
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.41966861486434937,
+          "comparator": 0.4218844473361969,
+          "paired_difference": 0.002215832471847534
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.42598775029182434,
+          "comparator": 0.4286665618419647,
+          "paired_difference": 0.002678811550140381
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.4347621202468872,
+          "comparator": 0.420326828956604,
+          "paired_difference": -0.014435291290283203
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.42325130105018616,
+          "comparator": 0.4174616038799286,
+          "paired_difference": -0.005789697170257568
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.4246948262055715,
+        "mean_comparator": 0.4216668556133906,
+        "mean_paired_difference": -0.0030279705921808877,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.006484913281351233,
+        "standard_error": 0.0026474547609180417,
+        "ci95": {
+          "low": -0.009833469711265669,
+          "high": 0.003777528526903894,
+          "method": "t"
+        },
+        "t_statistic": -1.143728926695955,
+        "df": 5,
+        "p_value_raw": 0.304521658382498,
+        "exact_sign_flip_p_two_sided": 0.3125,
+        "relative_effect_percent": -0.7129756251646007,
+        "standardized_effect_dz": -0.46692537907769255,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.fusion_strategy": {
+          "family_size": 4,
+          "q_bh": 0.4060288778433307,
+          "q_bh_exact_sign_flip": 0.375
+        }
+      }
+    },
+    {
+      "id": "horizon_average_primary|fusion_strategy|ETTh2|avg|fusion_sum",
+      "scope": "horizon_average_primary",
+      "family": "fusion_strategy",
+      "dataset": "ETTh2",
+      "horizon": null,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "fusion_sum",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.3745475932955742,
+          "comparator": 0.3704335168004036,
+          "paired_difference": -0.004114076495170593
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.3729163184762001,
+          "comparator": 0.37144412100315094,
+          "paired_difference": -0.0014721974730491638
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.3755128011107445,
+          "comparator": 0.37281476706266403,
+          "paired_difference": -0.0026980340480804443
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.37812111526727676,
+          "comparator": 0.37855470180511475,
+          "paired_difference": 0.0004335865378379822
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.3793039843440056,
+          "comparator": 0.3710153326392174,
+          "paired_difference": -0.008288651704788208
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.37465763837099075,
+          "comparator": 0.36942997574806213,
+          "paired_difference": -0.005227662622928619
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.37584324181079865,
+        "mean_comparator": 0.37228206917643547,
+        "mean_paired_difference": -0.0035611726343631744,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.0030495532856532827,
+        "standard_error": 0.0012449749155464093,
+        "ci95": {
+          "low": -0.006761482538089621,
+          "high": -0.0003608627306367286,
+          "method": "t"
+        },
+        "t_statistic": -2.860437258529185,
+        "df": 5,
+        "p_value_raw": 0.03538835419118937,
+        "exact_sign_flip_p_two_sided": 0.0625,
+        "relative_effect_percent": -0.9475154102028224,
+        "standardized_effect_dz": -1.1677686207736788,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "horizon_average_primary.fusion_strategy": {
+          "family_size": 1,
+          "q_bh": 0.03538835419118937,
+          "q_bh_exact_sign_flip": 0.0625
+        }
+      }
+    },
+    {
+      "id": "per_horizon|component_removal|ETTh2|h96|no_linear_backbone",
+      "scope": "per_horizon",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": 96,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "no_linear_backbone",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.2922987639904022,
+          "comparator": 0.29411521553993225,
+          "paired_difference": 0.0018164515495300293
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.29243165254592896,
+          "comparator": 0.29190996289253235,
+          "paired_difference": -0.0005216896533966064
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.2955000698566437,
+          "comparator": 0.28980448842048645,
+          "paired_difference": -0.0056955814361572266
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.2890491783618927,
+          "comparator": 0.29431775212287903,
+          "paired_difference": 0.005268573760986328
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.29551857709884644,
+          "comparator": 0.2892352342605591,
+          "paired_difference": -0.0062833428382873535
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.29376301169395447,
+          "comparator": 0.2861343324184418,
+          "paired_difference": -0.007628679275512695
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.29309354225794476,
+        "mean_comparator": 0.2909194976091385,
+        "mean_paired_difference": -0.002174044648806254,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.005159215010041329,
+        "standard_error": 0.0021062407079848744,
+        "ci95": {
+          "low": -0.007588308754229929,
+          "high": 0.0032402194566174204,
+          "method": "t"
+        },
+        "t_statistic": -1.0321919240115012,
+        "df": 5,
+        "p_value_raw": 0.3493004468827011,
+        "exact_sign_flip_p_two_sided": 0.34375,
+        "relative_effect_percent": -0.7417579493760829,
+        "standardized_effect_dz": -0.42139058840830096,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.component_removal": {
+          "family_size": 16,
+          "q_bh": 0.5588807150123218,
+          "q_bh_exact_sign_flip": 0.55
+        }
+      }
+    },
+    {
+      "id": "per_horizon|component_removal|ETTh2|h192|no_linear_backbone",
+      "scope": "per_horizon",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": 192,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "no_linear_backbone",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.3675609529018402,
+          "comparator": 0.3665522038936615,
+          "paired_difference": -0.001008749008178711
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.36538630723953247,
+          "comparator": 0.36093670129776,
+          "paired_difference": -0.004449605941772461
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.3718629479408264,
+          "comparator": 0.37139859795570374,
+          "paired_difference": -0.00046434998512268066
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.3733803629875183,
+          "comparator": 0.37608978152275085,
+          "paired_difference": 0.002709418535232544
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.37274429202079773,
+          "comparator": 0.3717789947986603,
+          "paired_difference": -0.0009652972221374512
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.36655566096305847,
+          "comparator": 0.3666009306907654,
+          "paired_difference": 4.526972770690918e-05
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.36958175400892895,
+        "mean_comparator": 0.3688928683598836,
+        "mean_paired_difference": -0.0006888856490453085,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.0023004175602204437,
+        "standard_error": 0.0009391415363130469,
+        "ci95": {
+          "low": -0.0031030258233832025,
+          "high": 0.0017252545252925853,
+          "method": "t"
+        },
+        "t_statistic": -0.733526973740069,
+        "df": 5,
+        "p_value_raw": 0.4961678474666925,
+        "exact_sign_flip_p_two_sided": 0.5625,
+        "relative_effect_percent": -0.18639601159224578,
+        "standardized_effect_dz": -0.2994611330385142,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.component_removal": {
+          "family_size": 16,
+          "q_bh": 0.5649426069809526,
+          "q_bh_exact_sign_flip": 0.625
+        }
+      }
+    },
+    {
+      "id": "per_horizon|component_removal|ETTh2|h336|no_linear_backbone",
+      "scope": "per_horizon",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": 336,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "no_linear_backbone",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.4152366816997528,
+          "comparator": 0.4127594530582428,
+          "paired_difference": -0.0024772286415100098
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.4124421179294586,
+          "comparator": 0.4183034896850586,
+          "paired_difference": 0.005861371755599976
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.41501957178115845,
+          "comparator": 0.41264697909355164,
+          "paired_difference": -0.0023725926876068115
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.4240671694278717,
+          "comparator": 0.4329625070095062,
+          "paired_difference": 0.008895337581634521
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.41419094800949097,
+          "comparator": 0.41732558608055115,
+          "paired_difference": 0.0031346380710601807
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.4150605797767639,
+          "comparator": 0.4107849597930908,
+          "paired_difference": -0.004275619983673096
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.4160028447707494,
+        "mean_comparator": 0.4174638291200002,
+        "mean_paired_difference": 0.0014609843492507935,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.005301860009864039,
+        "standard_error": 0.002164475285305714,
+        "ci95": {
+          "low": -0.004102976502839788,
+          "high": 0.007024945201341375,
+          "method": "t"
+        },
+        "t_statistic": 0.6749831514220509,
+        "df": 5,
+        "p_value_raw": 0.529633694044643,
+        "exact_sign_flip_p_two_sided": 0.5625,
+        "relative_effect_percent": 0.35119575926359636,
+        "standardized_effect_dz": 0.2755607176599631,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.component_removal": {
+          "family_size": 16,
+          "q_bh": 0.5649426069809526,
+          "q_bh_exact_sign_flip": 0.625
+        }
+      }
+    },
+    {
+      "id": "per_horizon|component_removal|ETTh2|h720|no_linear_backbone",
+      "scope": "per_horizon",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": 720,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "no_linear_backbone",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.4230939745903015,
+          "comparator": 0.4287298917770386,
+          "paired_difference": 0.0056359171867370605
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.42140519618988037,
+          "comparator": 0.4217074513435364,
+          "paired_difference": 0.00030225515365600586
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.41966861486434937,
+          "comparator": 0.42775219678878784,
+          "paired_difference": 0.008083581924438477
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.42598775029182434,
+          "comparator": 0.4282217025756836,
+          "paired_difference": 0.002233952283859253
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.4347621202468872,
+          "comparator": 0.430799275636673,
+          "paired_difference": -0.003962844610214233
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.42325130105018616,
+          "comparator": 0.42400527000427246,
+          "paired_difference": 0.0007539689540863037
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.4246948262055715,
+        "mean_comparator": 0.42686929802099866,
+        "mean_paired_difference": 0.0021744718154271445,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.004244818035705325,
+        "standard_error": 0.0017329397064068722,
+        "ci95": {
+          "low": -0.002280191516115277,
+          "high": 0.006629135146969566,
+          "method": "t"
+        },
+        "t_statistic": 1.254787923311976,
+        "df": 5,
+        "p_value_raw": 0.2650128865923582,
+        "exact_sign_flip_p_two_sided": 0.28125,
+        "relative_effect_percent": 0.5120080776248029,
+        "standardized_effect_dz": 0.5122650245868151,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.component_removal": {
+          "family_size": 16,
+          "q_bh": 0.47113402060863685,
+          "q_bh_exact_sign_flip": 0.5
+        }
+      }
+    },
+    {
+      "id": "horizon_average_primary|component_removal|ETTh2|avg|no_linear_backbone",
+      "scope": "horizon_average_primary",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": null,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "no_linear_backbone",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.3745475932955742,
+          "comparator": 0.3755391910672188,
+          "paired_difference": 0.0009915977716445923
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.3729163184762001,
+          "comparator": 0.37321440130472183,
+          "paired_difference": 0.0002980828285217285
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.3755128011107445,
+          "comparator": 0.3754005655646324,
+          "paired_difference": -0.00011223554611206055
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.37812111526727676,
+          "comparator": 0.3828979358077049,
+          "paired_difference": 0.004776820540428162
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.3793039843440056,
+          "comparator": 0.37728477269411087,
+          "paired_difference": -0.0020192116498947144
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.37465763837099075,
+          "comparator": 0.3718813732266426,
+          "paired_difference": -0.0027762651443481445
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.37584324181079865,
+        "mean_comparator": 0.3760363732775052,
+        "mean_paired_difference": 0.00019313146670659384,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.0026632234628305987,
+        "standard_error": 0.0010872564258238415,
+        "ci95": {
+          "low": -0.0026017501521950273,
+          "high": 0.0029880130856082153,
+          "method": "t"
+        },
+        "t_statistic": 0.1776319386296138,
+        "df": 5,
+        "p_value_raw": 0.8659841125907878,
+        "exact_sign_flip_p_two_sided": 0.875,
+        "relative_effect_percent": 0.051386175197961174,
+        "standardized_effect_dz": 0.07251793527732167,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "horizon_average_primary.component_removal": {
+          "family_size": 4,
+          "q_bh": 0.8659841125907878,
+          "q_bh_exact_sign_flip": 0.875
+        }
+      }
+    },
+    {
+      "id": "per_horizon|component_removal|ETTh2|h96|no_revin",
+      "scope": "per_horizon",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": 96,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "no_revin",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.2922987639904022,
+          "comparator": 0.3229232132434845,
+          "paired_difference": 0.030624449253082275
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.29243165254592896,
+          "comparator": 0.32170370221138,
+          "paired_difference": 0.02927204966545105
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.2955000698566437,
+          "comparator": 0.33970916271209717,
+          "paired_difference": 0.04420909285545349
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.2890491783618927,
+          "comparator": 0.325115442276001,
+          "paired_difference": 0.036066263914108276
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.29551857709884644,
+          "comparator": 0.30485016107559204,
+          "paired_difference": 0.009331583976745605
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.29376301169395447,
+          "comparator": 0.3011939525604248,
+          "paired_difference": 0.007430940866470337
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.29309354225794476,
+        "mean_comparator": 0.3192492723464966,
+        "mean_paired_difference": 0.026155730088551838,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.014747834487682864,
+        "standard_error": 0.006020778217640531,
+        "ci95": {
+          "low": 0.010678826965890348,
+          "high": 0.04163263321121333,
+          "method": "t"
+        },
+        "t_statistic": 4.344244073285587,
+        "df": 5,
+        "p_value_raw": 0.007399227974643123,
+        "exact_sign_flip_p_two_sided": 0.03125,
+        "relative_effect_percent": 8.924021282438488,
+        "standardized_effect_dz": 1.77353021627661,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.component_removal": {
+          "family_size": 16,
+          "q_bh": 0.02959691189857249,
+          "q_bh_exact_sign_flip": 0.125
+        }
+      }
+    },
+    {
+      "id": "per_horizon|component_removal|ETTh2|h192|no_revin",
+      "scope": "per_horizon",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": 192,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "no_revin",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.3675609529018402,
+          "comparator": 0.43249303102493286,
+          "paired_difference": 0.06493207812309265
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.36538630723953247,
+          "comparator": 0.45404893159866333,
+          "paired_difference": 0.08866262435913086
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.3718629479408264,
+          "comparator": 0.41143015027046204,
+          "paired_difference": 0.03956720232963562
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.3733803629875183,
+          "comparator": 0.4632281959056854,
+          "paired_difference": 0.08984783291816711
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.37274429202079773,
+          "comparator": 0.44934558868408203,
+          "paired_difference": 0.0766012966632843
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.36655566096305847,
+          "comparator": 0.4419182538986206,
+          "paired_difference": 0.07536259293556213
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.36958175400892895,
+        "mean_comparator": 0.44207735856374103,
+        "mean_paired_difference": 0.07249560455481212,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.018595888221746817,
+        "standard_error": 0.007591739576185224,
+        "ci95": {
+          "low": 0.052980416699389105,
+          "high": 0.09201079241023513,
+          "method": "t"
+        },
+        "t_statistic": 9.549274422192504,
+        "df": 5,
+        "p_value_raw": 0.00021317280517077567,
+        "exact_sign_flip_p_two_sided": 0.03125,
+        "relative_effect_percent": 19.615579981543313,
+        "standardized_effect_dz": 3.8984749580303832,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.component_removal": {
+          "family_size": 16,
+          "q_bh": 0.0017053824413662054,
+          "q_bh_exact_sign_flip": 0.125
+        }
+      }
+    },
+    {
+      "id": "per_horizon|component_removal|ETTh2|h336|no_revin",
+      "scope": "per_horizon",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": 336,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "no_revin",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.4152366816997528,
+          "comparator": 0.5442118644714355,
+          "paired_difference": 0.12897518277168274
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.4124421179294586,
+          "comparator": 0.506438672542572,
+          "paired_difference": 0.0939965546131134
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.41501957178115845,
+          "comparator": 0.555619478225708,
+          "paired_difference": 0.14059990644454956
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.4240671694278717,
+          "comparator": 0.500429093837738,
+          "paired_difference": 0.07636192440986633
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.41419094800949097,
+          "comparator": 0.49961772561073303,
+          "paired_difference": 0.08542677760124207
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.4150605797767639,
+          "comparator": 0.5981671214103699,
+          "paired_difference": 0.18310654163360596
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.4160028447707494,
+        "mean_comparator": 0.5340806593497595,
+        "mean_paired_difference": 0.11807781457901001,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.040597894989125576,
+        "standard_error": 0.016574021225741947,
+        "ci95": {
+          "low": 0.07547293667266715,
+          "high": 0.16068269248535288,
+          "method": "t"
+        },
+        "t_statistic": 7.124270747018075,
+        "df": 5,
+        "p_value_raw": 0.0008453405899246614,
+        "exact_sign_flip_p_two_sided": 0.03125,
+        "relative_effect_percent": 28.38389594284632,
+        "standardized_effect_dz": 2.9084713532718376,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.component_removal": {
+          "family_size": 16,
+          "q_bh": 0.004508483146264861,
+          "q_bh_exact_sign_flip": 0.125
+        }
+      }
+    },
+    {
+      "id": "per_horizon|component_removal|ETTh2|h720|no_revin",
+      "scope": "per_horizon",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": 720,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "no_revin",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.4230939745903015,
+          "comparator": 0.8123416304588318,
+          "paired_difference": 0.3892476558685303
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.42140519618988037,
+          "comparator": 0.8138226866722107,
+          "paired_difference": 0.3924174904823303
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.41966861486434937,
+          "comparator": 0.8917481899261475,
+          "paired_difference": 0.4720795750617981
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.42598775029182434,
+          "comparator": 0.8839805126190186,
+          "paired_difference": 0.4579927623271942
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.4347621202468872,
+          "comparator": 0.9410910606384277,
+          "paired_difference": 0.5063289403915405
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.42325130105018616,
+          "comparator": 0.8675341606140137,
+          "paired_difference": 0.4442828595638275
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.4246948262055715,
+        "mean_comparator": 0.8684197068214417,
+        "mean_paired_difference": 0.4437248806158702,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.04588541616906136,
+        "standard_error": 0.0187326427082422,
+        "ci95": {
+          "low": 0.39557108953659786,
+          "high": 0.4918786716951425,
+          "method": "t"
+        },
+        "t_statistic": 23.68725478443226,
+        "df": 5,
+        "p_value_raw": 2.4973111261967053e-06,
+        "exact_sign_flip_p_two_sided": 0.03125,
+        "relative_effect_percent": 104.48087738207748,
+        "standardized_effect_dz": 9.67028127152643,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.component_removal": {
+          "family_size": 16,
+          "q_bh": 3.9956978019147285e-05,
+          "q_bh_exact_sign_flip": 0.125
+        }
+      }
+    },
+    {
+      "id": "horizon_average_primary|component_removal|ETTh2|avg|no_revin",
+      "scope": "horizon_average_primary",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": null,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "no_revin",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.3745475932955742,
+          "comparator": 0.5279924347996712,
+          "paired_difference": 0.15344484150409698
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.3729163184762001,
+          "comparator": 0.5240034982562065,
+          "paired_difference": 0.1510871797800064
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.3755128011107445,
+          "comparator": 0.5496267452836037,
+          "paired_difference": 0.1741139441728592
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.37812111526727676,
+          "comparator": 0.5431883111596107,
+          "paired_difference": 0.16506719589233398
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.3793039843440056,
+          "comparator": 0.5487261340022087,
+          "paired_difference": 0.16942214965820312
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.37465763837099075,
+          "comparator": 0.5522033721208572,
+          "paired_difference": 0.17754573374986649
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.37584324181079865,
+        "mean_comparator": 0.5409567492703596,
+        "mean_paired_difference": 0.16511350745956102,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.010835407581397866,
+        "standard_error": 0.00442353662158486,
+        "ci95": {
+          "low": 0.153742444570843,
+          "high": 0.17648457034827905,
+          "method": "t"
+        },
+        "t_statistic": 37.32613100881356,
+        "df": 5,
+        "p_value_raw": 2.5995906239731165e-07,
+        "exact_sign_flip_p_two_sided": 0.03125,
+        "relative_effect_percent": 43.93148235526341,
+        "standardized_effect_dz": 15.238329173978325,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "horizon_average_primary.component_removal": {
+          "family_size": 4,
+          "q_bh": 1.0398362495892466e-06,
+          "q_bh_exact_sign_flip": 0.125
+        }
+      }
+    },
+    {
+      "id": "per_horizon|encoder_replacement|ETTh2|h96|time_mlp",
+      "scope": "per_horizon",
+      "family": "encoder_replacement",
+      "dataset": "ETTh2",
+      "horizon": 96,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "time_mlp",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.2922987639904022,
+          "comparator": 0.2948876917362213,
+          "paired_difference": 0.002588927745819092
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.29243165254592896,
+          "comparator": 0.28944718837738037,
+          "paired_difference": -0.002984464168548584
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.2955000698566437,
+          "comparator": 0.29497259855270386,
+          "paired_difference": -0.0005274713039398193
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.2890491783618927,
+          "comparator": 0.2941155731678009,
+          "paired_difference": 0.005066394805908203
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.29551857709884644,
+          "comparator": 0.2926192581653595,
+          "paired_difference": -0.0028993189334869385
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.29376301169395447,
+          "comparator": 0.2930757701396942,
+          "paired_difference": -0.0006872415542602539
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.29309354225794476,
+        "mean_comparator": 0.29318634668986004,
+        "mean_paired_difference": 9.28044319152832e-05,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.0031743607485197733,
+        "standard_error": 0.001295927348898786,
+        "ci95": {
+          "low": -0.0032384828714682517,
+          "high": 0.003424091735298818,
+          "method": "t"
+        },
+        "t_statistic": 0.07161237240200521,
+        "df": 5,
+        "p_value_raw": 0.9456866247013356,
+        "exact_sign_flip_p_two_sided": 1.0,
+        "relative_effect_percent": 0.031663758675927495,
+        "standardized_effect_dz": 0.02923562860918015,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.encoder_replacement": {
+          "family_size": 4,
+          "q_bh": 0.9456866247013356,
+          "q_bh_exact_sign_flip": 1.0
+        }
+      }
+    },
+    {
+      "id": "per_horizon|encoder_replacement|ETTh2|h192|time_mlp",
+      "scope": "per_horizon",
+      "family": "encoder_replacement",
+      "dataset": "ETTh2",
+      "horizon": 192,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "time_mlp",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.3675609529018402,
+          "comparator": 0.36982837319374084,
+          "paired_difference": 0.0022674202919006348
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.36538630723953247,
+          "comparator": 0.36782538890838623,
+          "paired_difference": 0.0024390816688537598
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.3718629479408264,
+          "comparator": 0.3689103126525879,
+          "paired_difference": -0.0029526352882385254
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.3733803629875183,
+          "comparator": 0.3731484115123749,
+          "paired_difference": -0.00023195147514343262
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.37274429202079773,
+          "comparator": 0.3669183850288391,
+          "paired_difference": -0.005825906991958618
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.36655566096305847,
+          "comparator": 0.36785778403282166,
+          "paired_difference": 0.0013021230697631836
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.36958175400892895,
+        "mean_comparator": 0.36908144255479175,
+        "mean_paired_difference": -0.0005003114541371664,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.0032862446123364144,
+        "standard_error": 0.0013416037450324216,
+        "ci95": {
+          "low": -0.003949013671739153,
+          "high": 0.0029483907634648204,
+          "method": "t"
+        },
+        "t_statistic": -0.37292043644755607,
+        "df": 5,
+        "p_value_raw": 0.7244942597170927,
+        "exact_sign_flip_p_two_sided": 0.75,
+        "relative_effect_percent": -0.13537233608266253,
+        "standardized_effect_dz": -0.15224413065875245,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.encoder_replacement": {
+          "family_size": 4,
+          "q_bh": 0.9456866247013356,
+          "q_bh_exact_sign_flip": 1.0
+        }
+      }
+    },
+    {
+      "id": "per_horizon|encoder_replacement|ETTh2|h336|time_mlp",
+      "scope": "per_horizon",
+      "family": "encoder_replacement",
+      "dataset": "ETTh2",
+      "horizon": 336,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "time_mlp",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.4152366816997528,
+          "comparator": 0.41739922761917114,
+          "paired_difference": 0.002162545919418335
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.4124421179294586,
+          "comparator": 0.4134300649166107,
+          "paired_difference": 0.0009879469871520996
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.41501957178115845,
+          "comparator": 0.41924211382865906,
+          "paired_difference": 0.00422254204750061
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.4240671694278717,
+          "comparator": 0.41770416498184204,
+          "paired_difference": -0.006363004446029663
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.41419094800949097,
+          "comparator": 0.42231616377830505,
+          "paired_difference": 0.008125215768814087
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.4150605797767639,
+          "comparator": 0.42284420132637024,
+          "paired_difference": 0.007783621549606323
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.4160028447707494,
+        "mean_comparator": 0.4188226560751597,
+        "mean_paired_difference": 0.002819811304410299,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.005345394503467823,
+        "standard_error": 0.0021822481678956686,
+        "ci95": {
+          "low": -0.002789836196832918,
+          "high": 0.008429458805653515,
+          "method": "t"
+        },
+        "t_statistic": 1.292158859791565,
+        "df": 5,
+        "p_value_raw": 0.25279729443423193,
+        "exact_sign_flip_p_two_sided": 0.21875,
+        "relative_effect_percent": 0.6778346205695394,
+        "standardized_effect_dz": 0.5275216455176409,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.encoder_replacement": {
+          "family_size": 4,
+          "q_bh": 0.5055945888684639,
+          "q_bh_exact_sign_flip": 0.4375
+        }
+      }
+    },
+    {
+      "id": "per_horizon|encoder_replacement|ETTh2|h720|time_mlp",
+      "scope": "per_horizon",
+      "family": "encoder_replacement",
+      "dataset": "ETTh2",
+      "horizon": 720,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "time_mlp",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.4230939745903015,
+          "comparator": 0.42721495032310486,
+          "paired_difference": 0.004120975732803345
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.42140519618988037,
+          "comparator": 0.42960870265960693,
+          "paired_difference": 0.008203506469726562
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.41966861486434937,
+          "comparator": 0.42904171347618103,
+          "paired_difference": 0.009373098611831665
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.42598775029182434,
+          "comparator": 0.4264431893825531,
+          "paired_difference": 0.00045543909072875977
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.4347621202468872,
+          "comparator": 0.43166354298591614,
+          "paired_difference": -0.0030985772609710693
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.42325130105018616,
+          "comparator": 0.42955154180526733,
+          "paired_difference": 0.006300240755081177
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.4246948262055715,
+        "mean_comparator": 0.4289206067721049,
+        "mean_paired_difference": 0.004225780566533406,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.004785253347042946,
+        "standard_error": 0.0019535714983667614,
+        "ci95": {
+          "low": -0.0007960348417849952,
+          "high": 0.009247595974851808,
+          "method": "t"
+        },
+        "t_statistic": 2.1631051487320905,
+        "df": 5,
+        "p_value_raw": 0.08286132361683814,
+        "exact_sign_flip_p_two_sided": 0.09375,
+        "relative_effect_percent": 0.9950157868153396,
+        "standardized_effect_dz": 0.883083979063456,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.encoder_replacement": {
+          "family_size": 4,
+          "q_bh": 0.33144529446735255,
+          "q_bh_exact_sign_flip": 0.375
+        }
+      }
+    },
+    {
+      "id": "horizon_average_primary|encoder_replacement|ETTh2|avg|time_mlp",
+      "scope": "horizon_average_primary",
+      "family": "encoder_replacement",
+      "dataset": "ETTh2",
+      "horizon": null,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "time_mlp",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.3745475932955742,
+          "comparator": 0.37733256071805954,
+          "paired_difference": 0.0027849674224853516
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.3729163184762001,
+          "comparator": 0.37507783621549606,
+          "paired_difference": 0.0021615177392959595
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.3755128011107445,
+          "comparator": 0.37804168462753296,
+          "paired_difference": 0.0025288835167884827
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.37812111526727676,
+          "comparator": 0.37785283476114273,
+          "paired_difference": -0.0002682805061340332
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.3793039843440056,
+          "comparator": 0.37837933748960495,
+          "paired_difference": -0.0009246468544006348
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.37465763837099075,
+          "comparator": 0.37833232432603836,
+          "paired_difference": 0.0036746859550476074
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.37584324181079865,
+        "mean_comparator": 0.3775027630229791,
+        "mean_paired_difference": 0.0016595212121804555,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.0018291885361857942,
+        "standard_error": 0.0007467630928339466,
+        "ci95": {
+          "low": -0.0002600944297820773,
+          "high": 0.0035791368541429882,
+          "method": "t"
+        },
+        "t_statistic": 2.2222860611423836,
+        "df": 5,
+        "p_value_raw": 0.0769069122026519,
+        "exact_sign_flip_p_two_sided": 0.125,
+        "relative_effect_percent": 0.4415461095388983,
+        "standardized_effect_dz": 0.90724448538305,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "horizon_average_primary.encoder_replacement": {
+          "family_size": 1,
+          "q_bh": 0.0769069122026519,
+          "q_bh_exact_sign_flip": 0.125
+        }
+      }
+    },
+    {
+      "id": "per_horizon|component_removal|ETTh2|h96|time_only",
+      "scope": "per_horizon",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": 96,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "time_only",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.2922987639904022,
+          "comparator": 0.2920020818710327,
+          "paired_difference": -0.00029668211936950684
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.29243165254592896,
+          "comparator": 0.3018929064273834,
+          "paired_difference": 0.009461253881454468
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.2955000698566437,
+          "comparator": 0.2882131338119507,
+          "paired_difference": -0.007286936044692993
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.2890491783618927,
+          "comparator": 0.289515882730484,
+          "paired_difference": 0.0004667043685913086
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.29551857709884644,
+          "comparator": 0.2917419672012329,
+          "paired_difference": -0.0037766098976135254
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.29376301169395447,
+          "comparator": 0.28786712884902954,
+          "paired_difference": -0.005895882844924927
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.29309354225794476,
+        "mean_comparator": 0.29187218348185223,
+        "mean_paired_difference": -0.0012213587760925293,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.00604970261180832,
+        "standard_error": 0.002469780749085514,
+        "ci95": {
+          "low": -0.007570132307695984,
+          "high": 0.005127414755510926,
+          "method": "t"
+        },
+        "t_statistic": -0.49452113372604506,
+        "df": 5,
+        "p_value_raw": 0.6418977272610162,
+        "exact_sign_flip_p_two_sided": 0.625,
+        "relative_effect_percent": -0.4167129601980927,
+        "standardized_effect_dz": -0.20188740744190933,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.component_removal": {
+          "family_size": 16,
+          "q_bh": 0.6418977272610162,
+          "q_bh_exact_sign_flip": 0.625
+        }
+      }
+    },
+    {
+      "id": "per_horizon|component_removal|ETTh2|h192|time_only",
+      "scope": "per_horizon",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": 192,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "time_only",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.3675609529018402,
+          "comparator": 0.37906569242477417,
+          "paired_difference": 0.01150473952293396
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.36538630723953247,
+          "comparator": 0.38309505581855774,
+          "paired_difference": 0.01770874857902527
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.3718629479408264,
+          "comparator": 0.3661121428012848,
+          "paired_difference": -0.005750805139541626
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.3733803629875183,
+          "comparator": 0.3897300958633423,
+          "paired_difference": 0.016349732875823975
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.37274429202079773,
+          "comparator": 0.368564248085022,
+          "paired_difference": -0.004180043935775757
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.36655566096305847,
+          "comparator": 0.3656022548675537,
+          "paired_difference": -0.0009534060955047607
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.36958175400892895,
+        "mean_comparator": 0.3753615816434224,
+        "mean_paired_difference": 0.00577982763449351,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.010623442362724977,
+        "standard_error": 0.004337002183423854,
+        "ci95": {
+          "low": -0.0053687913993308535,
+          "high": 0.016928446668317873,
+          "method": "t"
+        },
+        "t_statistic": 1.332678055036305,
+        "df": 5,
+        "p_value_raw": 0.24013882263798003,
+        "exact_sign_flip_p_two_sided": 0.25,
+        "relative_effect_percent": 1.563883382174184,
+        "standardized_effect_dz": 0.5440635377072776,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.component_removal": {
+          "family_size": 16,
+          "q_bh": 0.47113402060863685,
+          "q_bh_exact_sign_flip": 0.5
+        }
+      }
+    },
+    {
+      "id": "per_horizon|component_removal|ETTh2|h336|time_only",
+      "scope": "per_horizon",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": 336,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "time_only",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.4152366816997528,
+          "comparator": 0.41139134764671326,
+          "paired_difference": -0.0038453340530395508
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.4124421179294586,
+          "comparator": 0.413621187210083,
+          "paired_difference": 0.0011790692806243896
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.41501957178115845,
+          "comparator": 0.43400514125823975,
+          "paired_difference": 0.0189855694770813
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.4240671694278717,
+          "comparator": 0.4198780059814453,
+          "paired_difference": -0.004189163446426392
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.41419094800949097,
+          "comparator": 0.4133829176425934,
+          "paired_difference": -0.000808030366897583
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.4150605797767639,
+          "comparator": 0.42039021849632263,
+          "paired_difference": 0.005329638719558716
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.4160028447707494,
+        "mean_comparator": 0.4187781363725662,
+        "mean_paired_difference": 0.002775291601816813,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.008683573437267543,
+        "standard_error": 0.003545054010881886,
+        "ci95": {
+          "low": -0.006337559844905799,
+          "high": 0.011888143048539425,
+          "method": "t"
+        },
+        "t_statistic": 0.7828629954008564,
+        "df": 5,
+        "p_value_raw": 0.4691452010962923,
+        "exact_sign_flip_p_two_sided": 0.5625,
+        "relative_effect_percent": 0.6671328421675142,
+        "standardized_effect_dz": 0.3196024795398187,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.component_removal": {
+          "family_size": 16,
+          "q_bh": 0.5649426069809526,
+          "q_bh_exact_sign_flip": 0.625
+        }
+      }
+    },
+    {
+      "id": "per_horizon|component_removal|ETTh2|h720|time_only",
+      "scope": "per_horizon",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": 720,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "time_only",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.4230939745903015,
+          "comparator": 0.4393041133880615,
+          "paired_difference": 0.01621013879776001
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.42140519618988037,
+          "comparator": 0.42241811752319336,
+          "paired_difference": 0.0010129213333129883
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.41966861486434937,
+          "comparator": 0.4303405284881592,
+          "paired_difference": 0.010671913623809814
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.42598775029182434,
+          "comparator": 0.4225471615791321,
+          "paired_difference": -0.0034405887126922607
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.4347621202468872,
+          "comparator": 0.4292028546333313,
+          "paired_difference": -0.005559265613555908
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.42325130105018616,
+          "comparator": 0.42077162861824036,
+          "paired_difference": -0.0024796724319458008
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.4246948262055715,
+        "mean_comparator": 0.42743073403835297,
+        "mean_paired_difference": 0.0027359078327814737,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.008736876559378126,
+        "standard_error": 0.003566814919359918,
+        "ci95": {
+          "low": -0.006432881810001713,
+          "high": 0.01190469747556466,
+          "method": "t"
+        },
+        "t_statistic": 0.7670450793315751,
+        "df": 5,
+        "p_value_raw": 0.47769054473883044,
+        "exact_sign_flip_p_two_sided": 0.5,
+        "relative_effect_percent": 0.6442055951623885,
+        "standardized_effect_dz": 0.31314484234583373,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "per_horizon.component_removal": {
+          "family_size": 16,
+          "q_bh": 0.5649426069809526,
+          "q_bh_exact_sign_flip": 0.625
+        }
+      }
+    },
+    {
+      "id": "horizon_average_primary|component_removal|ETTh2|avg|time_only",
+      "scope": "horizon_average_primary",
+      "family": "component_removal",
+      "dataset": "ETTh2",
+      "horizon": null,
+      "metric": "mse",
+      "reference_variant": "full",
+      "comparator_variant": "time_only",
+      "pairing": {
+        "basis": "explicit_seed_id",
+        "seed_ids_available": true,
+        "legacy": false,
+        "warning": null
+      },
+      "observations": [
+        {
+          "pair_index": 1,
+          "seed_id": 2024,
+          "reference": 0.3745475932955742,
+          "comparator": 0.3804408088326454,
+          "paired_difference": 0.005893215537071228
+        },
+        {
+          "pair_index": 2,
+          "seed_id": 2025,
+          "reference": 0.3729163184762001,
+          "comparator": 0.3802568167448044,
+          "paired_difference": 0.0073404982686042786
+        },
+        {
+          "pair_index": 3,
+          "seed_id": 2026,
+          "reference": 0.3755128011107445,
+          "comparator": 0.3796677365899086,
+          "paired_difference": 0.0041549354791641235
+        },
+        {
+          "pair_index": 4,
+          "seed_id": 2027,
+          "reference": 0.37812111526727676,
+          "comparator": 0.3804177865386009,
+          "paired_difference": 0.0022966712713241577
+        },
+        {
+          "pair_index": 5,
+          "seed_id": 2028,
+          "reference": 0.3793039843440056,
+          "comparator": 0.3757229968905449,
+          "paired_difference": -0.0035809874534606934
+        },
+        {
+          "pair_index": 6,
+          "seed_id": 2029,
+          "reference": 0.37465763837099075,
+          "comparator": 0.37365780770778656,
+          "paired_difference": -0.0009998306632041931
+        }
+      ],
+      "statistics": {
+        "n": 6,
+        "mean_reference": 0.37584324181079865,
+        "mean_comparator": 0.37836065888404846,
+        "mean_paired_difference": 0.002517417073249817,
+        "difference_definition": "comparator_minus_reference",
+        "sd_paired_difference": 0.004170129305791149,
+        "standard_error": 0.0017024481601024927,
+        "ci95": {
+          "low": -0.0018588652432221034,
+          "high": 0.006893699389721737,
+          "method": "t"
+        },
+        "t_statistic": 1.4787040993355478,
+        "df": 5,
+        "p_value_raw": 0.19927769176928156,
+        "exact_sign_flip_p_two_sided": 0.21875,
+        "relative_effect_percent": 0.6698050658356914,
+        "standardized_effect_dz": 0.6036784206556437,
+        "degenerate_zero_variance": false
+      },
+      "multiplicity": {
+        "horizon_average_primary.component_removal": {
+          "family_size": 4,
+          "q_bh": 0.26570358902570873,
+          "q_bh_exact_sign_flip": 0.2916666666666667
+        }
+      }
+    }
+  ],
+  "sources": [
+    "checkpoints/ablation_matrix/ETTh2_H192_core.json",
+    "checkpoints/ablation_matrix/ETTh2_H336_core.json",
+    "checkpoints/ablation_matrix/ETTh2_H720_core.json",
+    "checkpoints/ablation_matrix/ETTh2_H96_core.json"
+  ]
+}

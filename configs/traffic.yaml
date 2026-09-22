@@ -1,0 +1,65 @@
+# Traffic — road occupancy of 862 SF Bay Area sensors, hourly (862 channels,
+# 17,544 rows). The largest channel count: channel-independent processing
+# folds C into the batch (8 x 862 = 6,896 sequences per step) -- batch sized
+# for a 24-32 GB GPU; halve batch_size if you hit OOM.
+# Standard split: 0.7 / 0.1 / 0.2. Horizons: pred_len in {96, 192, 336, 720}.
+# Strong daily/weekly periodicity -> higher lr converges well here.
+
+experiment:
+  name: traffic
+  seed: 2024
+  checkpoint_dir: checkpoints
+
+data:
+  source: csv
+  csv_path: data/traffic.csv
+  target_columns: null
+  seq_len: 96
+  pred_len: 96
+  train_ratio: 0.7
+  val_ratio: 0.1
+  scale: true
+
+model:
+  d_model: 256               # Parameter-reduced variant. The variate mixer
+                             # dominates params and scales with d_model^2, so
+                             # 512->256 cuts the model ~19.7M -> ~5.3M. NOTE: the
+                             # manuscript's headline Traffic accuracy was measured
+                             # at d=512 with mixer_placement=both; set both to
+                             # reproduce Table 6 (see tab:hparams caption).
+  time_kernel_size: 25
+  time_dropout: 0.1
+  time_encoder: mlp          # S-Mamba recipe: linear/MLP over time,
+                             # Mamba over variates (memory-scalable)
+  mamba_layers: 2
+  mamba_d_state: 32          # richer state for many variates
+  mamba_d_conv: 4
+  mamba_expand: 2
+  use_official_mamba: true
+  freq_hidden: 512
+  freq_dropout: 0.1
+  freq_sparsity: 0.0
+  freq_encoder: linear
+  channel_mixer_layers: 2  # tested: 4 layers gave no accuracy gain over 2 on
+                           # traffic, so keep the cheaper/faster depth
+  mixer_placement: shared  # weight-tie one mixer across branches: cuts 5.3M ->
+                           # 2.9M. On Traffic (H=96, 3 seeds) this matched the
+                           # untied mixer within noise while time-only placement
+                           # was worse; the ablation is reported in the manuscript
+                           # (results/Ablation_traffic_mixer.json).
+  fusion: gated
+  head_dropout: 0.1
+
+train:
+  device: auto
+  epochs: 10
+  batch_size: 16
+  lr: 0.001
+  weight_decay: 0.0001
+  loss: mse
+  grad_clip: 5.0
+  num_workers: 2
+  patience: 5
+  amp: true
+  lr_scheduler: halve      # lr *= 0.5 each epoch; converges before patience can misfire
+  compile: false

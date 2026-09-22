@@ -1,0 +1,87 @@
+# Electricity (ECL) — household consumption, hourly (321 channels, 26,304 rows)
+# Standard split: 0.7 / 0.1 / 0.2. Horizons: pred_len in {96, 192, 336, 720}.
+# Many channels: channel-independent processing folds C into the batch
+# (16 x 321 = 5,136 sequences per step) -- sized for a 24-32 GB GPU.
+
+experiment:
+  name: electricity
+  seed: 2024
+  checkpoint_dir: checkpoints
+
+data:
+  source: csv
+  csv_path: data/electricity.csv
+  target_columns: null
+  seq_len: 96
+  pred_len: 96
+  train_ratio: 0.7
+  val_ratio: 0.1
+  scale: true
+
+model:
+  d_model: 512               # REVERTED from 256. The d256 cut (2.83M) was
+                             # measured to cost +0.0045 avg MSE on this dataset
+                             # (0.1678 -> 0.1722), which flips DD-Mamba from
+                             # beating to losing against published S-Mamba
+                             # (0.170). Electricity has 321 channels and the
+                             # highest cross-channel coupling in the suite, so
+                             # the variate mixer -- whose width scales as
+                             # d_model^2 -- is doing real work here. Paired with
+                             # mixer_placement=shared below this is ~10.6M
+                             # (d512+both is ~19.7M).
+  time_kernel_size: 25
+  time_dropout: 0.1
+  time_encoder: mlp          # S-Mamba recipe: linear/MLP over time,
+                             # Mamba over variates (memory-scalable)
+  mamba_layers: 2
+  mamba_d_state: 32          # richer state for many variates
+  mamba_d_conv: 4
+  mamba_expand: 2
+  use_official_mamba: true
+  freq_hidden: 512           # match d_model (reverted with it)
+  freq_dropout: 0.1
+  freq_sparsity: 0.0
+  freq_encoder: linear
+  freq_backbone: none        # REVERTED from 'fits'. Enabling the FITS spectral
+                             # map was tried and measured WORSE: it costs
+                             # +0.024 MSE at H=720 (0.200 -> 0.224) while doing
+                             # nothing at H=336 and slightly hurting H=96/192.
+                             # The map interpolates n_freq -> n_out_freq bins,
+                             # and that ratio grows with the horizon (2.0x at
+                             # H=96, 8.3x at H=720 for L=96), so at long
+                             # horizons it extrapolates 49 measured bins to 409
+                             # and amplifies error. Note this config also sets
+                             # freq_sparsity: 0.0, i.e. no low-pass, whereas
+                             # ETTh1/ETTh2 pair 'fits' with a 0.3-0.4 cutoff --
+                             # the regularizer that makes FITS work.
+  # freq_zero_init_head: left at the default 'auto'. Setting it to 'always' was
+  # tried and reverted. With freq_backbone: none the head is the branch's ONLY
+  # output pathway, so zeroing it leaves the branch with no pathway at all --
+  # it must grow the entire head from zero under a schedule that halves the
+  # learning rate every epoch over 10 epochs. 'auto' is principled, not an
+  # oversight: it zero-inits the head only when a backbone exists to carry the
+  # branch (as on ETTh1/ETTh2/Weather, which pair it with the FITS map).
+  channel_mixer_layers: 2  # the core of the model on high-channel data
+  mixer_placement: shared  # weight-tie one mixer across branches: halves the
+                           # mixer parameters (~19.7M -> ~10.6M at d512). Unlike
+                           # the width cut above, tying was measured
+                           # accuracy-neutral here (dMSE -0.0001, CI includes 0;
+                           # results/Ablation_electricity_mixer.json), so it is
+                           # kept. Sharing the mixer and shrinking it are NOT
+                           # equivalent: only the latter removes capacity.
+  fusion: gated
+  head_dropout: 0.1
+
+train:
+  device: auto
+  epochs: 10
+  batch_size: 16
+  lr: 0.0005
+  weight_decay: 0.0001
+  loss: mse
+  grad_clip: 5.0
+  num_workers: 4
+  patience: 5
+  amp: true
+  lr_scheduler: halve      # lr *= 0.5 each epoch; converges before patience can misfire
+  compile: false

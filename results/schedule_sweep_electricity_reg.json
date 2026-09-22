@@ -1,0 +1,101 @@
+{
+ "config": "configs/electricity.yaml",
+ "rows": [
+  {
+   "arm": "halve",
+   "horizon": 96,
+   "seed_offset": 0,
+   "test_mse": 0.14058507978916168,
+   "test_mae": 0.23604604601860046,
+   "best_val": 0.11867154000690149
+  },
+  {
+   "arm": "halve",
+   "horizon": 96,
+   "seed_offset": 1,
+   "test_mse": 0.1400671750307083,
+   "test_mae": 0.23600846529006958,
+   "best_val": 0.12002700042424712
+  },
+  {
+   "arm": "halve",
+   "horizon": 96,
+   "seed_offset": 2,
+   "test_mse": 0.14010541141033173,
+   "test_mae": 0.23580734431743622,
+   "best_val": 0.11903726946820253
+  },
+  {
+   "arm": "halve",
+   "horizon": 720,
+   "seed_offset": 0,
+   "test_mse": 0.2011329084634781,
+   "test_mae": 0.2973731458187103,
+   "best_val": 0.19739704032739003
+  },
+  {
+   "arm": "halve",
+   "horizon": 720,
+   "seed_offset": 1,
+   "test_mse": 0.19988951086997986,
+   "test_mae": 0.295219749212265,
+   "best_val": 0.2038718675573667
+  },
+  {
+   "arm": "halve",
+   "horizon": 720,
+   "seed_offset": 2,
+   "test_mse": 0.22042091190814972,
+   "test_mae": 0.31095847487449646,
+   "best_val": 0.20360676037768524
+  },
+  {
+   "arm": "halve_reg",
+   "horizon": 96,
+   "seed_offset": 0,
+   "test_mse": 0.14048025012016296,
+   "test_mae": 0.23592963814735413,
+   "best_val": 0.11836499313138565
+  },
+  {
+   "arm": "halve_reg",
+   "horizon": 96,
+   "seed_offset": 1,
+   "test_mse": 0.14013870060443878,
+   "test_mae": 0.23588931560516357,
+   "best_val": 0.11980521247821783
+  },
+  {
+   "arm": "halve_reg",
+   "horizon": 96,
+   "seed_offset": 2,
+   "test_mse": 0.1398477405309677,
+   "test_mae": 0.2354101687669754,
+   "best_val": 0.11903700049755708
+  },
+  {
+   "arm": "halve_reg",
+   "horizon": 720,
+   "seed_offset": 0,
+   "test_mse": 0.2014283388853073,
+   "test_mae": 0.2969829738140106,
+   "best_val": 0.195107006529967
+  },
+  {
+   "arm": "halve_reg",
+   "horizon": 720,
+   "seed_offset": 1,
+   "test_mse": 0.2010253369808197,
+   "test_mae": 0.2961962819099426,
+   "best_val": 0.20719103229542574
+  },
+  {
+   "arm": "halve_reg",
+   "horizon": 720,
+   "seed_offset": 2,
+   "test_mse": 0.21834582090377808,
+   "test_mae": 0.30904754996299744,
+   "best_val": 0.2064737394452095
+  }
+ ]
+}

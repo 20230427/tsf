@@ -1,5 +1,7 @@
 # 论文库全量阅读与 DD-Mamba 审计报告
 
+> **项目复现材料已补充：** 模型代码、数据配置、实验脚本、测试、精选结果和统计审计现已随仓库提供。请先阅读 [REPRODUCIBILITY.md](REPRODUCIBILITY.md)，数据集属性与划分见 [DATASETS.md](DATASETS.md)，代码入口说明见 [PROJECT_README.md](PROJECT_README.md)。最新模拟同行评审见 [README_PEER_REVIEW_V14.md](README_PEER_REVIEW_V14.md)。原始数据和训练检查点未纳入 Git。
+
 > 审计目标：从本仓库论文中提炼时序预测论文的写作与实验范式，并以 Neurocomputing 审稿人的视角审计当前稿件 **DD-Mamba: A Forecast-Decomposable Dual-Domain State-Space Framework for Multivariate Time-Series Forecasting**。
 >
 > 审计日期：2026-09-20  

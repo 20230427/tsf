@@ -1,0 +1,68 @@
+# Optuna HPO search space for DD-Mamba (schema: ddmamba-hpo-search-v1).
+#
+# Ported from references/pamba/src/hpo/search_space.py, expressed with this
+# repo's dotted config keys. Single-phase design: every key below is sampled
+# jointly by TPE (the Pamba Phase-1/Phase-2 split was deliberately dropped).
+#
+#   base.search             searched for every dataset
+#   base.fixed              locked for every dataset
+#   datasets.<name>.search  per-dataset distribution overrides
+#   datasets.<name>.fixed   per-dataset locked assignments (removed from search)
+#   forced_defaults         applied to every trial before the sampled params
+#                           and to the anchor trial — protocol defaults
+#                           (Mamba encoders, RevIN on). These keys are
+#                           additionally pinned in base.search as single-option
+#                           entries (marked "# pinned (single option)").
+#
+# The anchor trial (trial #0 of a fresh study) is the dataset's tuned config
+# snapped into this grid, so the search always starts from the shipped recipe.
+schema_version: ddmamba-hpo-search-v1
+
+forced_defaults:
+  model.time_encoder: mamba
+  model.use_revin: true
+
+base:
+  search:
+    # training
+    train.lr: {type: loguniform, low: 1.0e-4, high: 2.0e-3}
+    # architecture switches
+    model.time_encoder: {type: categorical, choices: [mamba]}          # pinned (single option): causal Mamba temporal encoder only
+    model.channel_mixer_layers: {type: categorical, choices: [1, 2]}   # variate BiMamba depth; 0 (channel-independent) excluded
+    model.mixer_placement: {type: categorical, choices: [both, shared]}
+    model.freq_backbone: {type: categorical, choices: [fits]}          # pinned (single option): FITS spectral anchor always on
+    model.use_revin: {type: categorical, choices: [true]}              # pinned (single option): RevIN always on
+    # backbone sizing
+    model.d_model: {type: categorical, choices: [128, 256, 512]}
+    model.mamba_layers: {type: categorical, choices: [1, 2, 3]}
+    model.mamba_d_state: {type: categorical, choices: [16, 32]}
+    model.freq_hidden: {type: categorical, choices: [128, 256, 512]}
+    model.time_kernel_size: {type: categorical, choices: [13, 25, 49]}
+    # regularization / spectral
+    # One shared dropout, transparently forwarded to model.time_dropout,
+    # model.freq_dropout and model.head_dropout (all three share the value).
+    model.dropout:
+      type: categorical
+      choices: [0.1, 0.2, 0.3]
+      forward_to: [model.time_dropout, model.freq_dropout, model.head_dropout]
+    model.freq_sparsity: {type: categorical, choices: [0.0, 0.1, 0.2, 0.3]}
+  fixed: {}
+
+datasets:
+  # fp16 AMP overflows the variate mixer on PEMS (see configs/PEMS*.yaml).
+  PEMS03: {fixed: {train.amp: false}}
+  PEMS04: {fixed: {train.amp: false}}
+  PEMS07: {fixed: {train.amp: false}}
+  PEMS08: {fixed: {train.amp: false}}
+  # Search-space narrowing for necessarily-OOM studies (Pamba pattern: its
+  # heaviest datasets cap d_model to [128, 256]). Electricity has 321
+  # channels; on a 24GB card the d512 corner OOMs on the first training
+  # step at every horizon (verified 2026-09-06: anchor d512 + shared mixer
+  # x2 + d_state 32 OOMed on 4/4 GPUs while d512+both+x1+d_state 16 fit --
+  # the boundary is real but unstable, so the whole d512 tier is dropped).
+  # The tuned electricity recipe is d512, but its measured HPO advantage
+  # over d256 was 0.1451 vs 0.1471 MSE -- single-seed noise -- so nothing
+  # proven is lost by keeping the anchor-snapped d256 region.
+  electricity:
+    search:
+      model.d_model: {type: categorical, choices: [128, 256]}

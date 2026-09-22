@@ -1,0 +1,69 @@
+# Predeclared validation-only search spaces for same-pipeline baseline reruns.
+#
+# Every architecture below has exactly eight candidate configurations.  The
+# search runner refuses unequal budgets unless explicitly overridden, so a
+# baseline cannot silently receive less validation tuning than another.  Test
+# data are unavailable during this search; only the frozen winner may later be
+# passed to run_unified_baselines.py for final evaluation.
+schema_version: ddmamba-baseline-search-v1
+selection_metric: mean_best_validation_loss_across_horizons_and_seeds
+trial_budget_per_architecture: 8
+
+architectures:
+  dlinear:
+    axes:
+      model.time_kernel_size: [13, 25, 49, 97]
+      train.lr: [0.0001, 0.0005]
+
+  rlinear:
+    axes:
+      train.lr: [0.0001, 0.0002, 0.0005, 0.001]
+      train.weight_decay: [0.0001, 0.0005]
+
+  patchtst:
+    axes:
+      model.baseline_d_model: [64, 128]
+      model.baseline_layers: [2, 3]
+      train.lr: [0.0001, 0.0005]
+
+  itransformer:
+    axes:
+      model.baseline_d_model: [64, 128]
+      model.baseline_layers: [1, 2]
+      train.lr: [0.0001, 0.0005]
+
+  smamba:
+    axes:
+      model.baseline_d_model: [64, 128]
+      model.baseline_layers: [1, 2]
+      train.lr: [0.0001, 0.0005]
+
+  msmamba:
+    axes:
+      model.baseline_d_model: [64, 128]
+      model.baseline_layers: [1, 2]
+      train.lr: [0.0001, 0.0005]
+
+  crossformer:
+    axes:
+      model.baseline_d_model: [64, 128]
+      model.baseline_layers: [2, 3]
+      train.lr: [0.0001, 0.0005]
+
+  tide:
+    axes:
+      model.tide_hidden: [128, 256]
+      model.baseline_layers: [1, 2]
+      train.lr: [0.0001, 0.0005]
+
+  fedformer:
+    axes:
+      model.baseline_d_model: [64, 128]
+      model.baseline_layers: [1, 2]
+      train.lr: [0.0001, 0.0005]
+
+  autoformer:
+    axes:
+      model.baseline_d_model: [64, 128]
+      model.baseline_layers: [1, 2]
+      train.lr: [0.0001, 0.0005]
